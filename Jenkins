@@ -1,25 +1,22 @@
-pipeline {
+stage 'Access repository'
+node {
 
-    agent any
+    git branch: 'modify', 
+    url: 'https://github.com/ColmCharlton/SystemInfo'
+		
+	}
 
-    tools {
 
-        maven ‘mvn’
+stage 'Tools'
+tools {
 
-    }
-
-    stages {
-
-        stage('Example') {
-
-            steps {
-
-                sh 'mvn --version'
-
-            }
-
-        }
+     maven ‘mvn’
 
     }
 
-}
+stage('mvn') 
+node {
+
+    sh 'mvn --version'
+
+    }
