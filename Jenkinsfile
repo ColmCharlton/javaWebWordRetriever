@@ -11,10 +11,10 @@ pipeline {
     stages {
 	
 	stage 'Access repository'{
-	step {
+	steps {
 	
-	checkout scm
-	}
+		checkout scm
+		}
 	}
     stage('Example') {
 	steps {
