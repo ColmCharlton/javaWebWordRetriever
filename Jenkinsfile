@@ -1,3 +1,12 @@
+pipeline {
+
+    agent any
+tools {
+
+        maven ‘mvn’
+
+    }
+
 stage 'Access repository'
 node {
 	
@@ -7,10 +16,7 @@ node {
 stage 'Run Maven'
 node{
 	
-	sh 'mvn --version'
+	sh 'mvn --veresion'
 	
-	stage 'Notify user'
-	node{
-	notify 'Ran!'
 	}
 }
