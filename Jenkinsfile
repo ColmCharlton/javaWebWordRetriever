@@ -10,16 +10,13 @@ pipeline {
 
     stages {
 	stage 'Access repository'
-	node {
+	step {
 	
 	checkout scm
 	}
-        stage('Example') {
-
-            steps {
-
-                sh 'mvn --version'
-
+    stage('Example') {
+	steps {
+            sh 'mvn --version'
             }
 
         }
