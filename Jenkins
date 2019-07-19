@@ -1,7 +1,11 @@
-stage 'Access repository'
-node {
-
-    git branch: 'modify', 
-    url: 'https://github.com/ColmCharlton/SystemInfo'
-		
-	}
+Jenkinsfile (Declarative Pipeline)
+pipeline {
+    agent any
+    stages {
+        stage('Example') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+}
