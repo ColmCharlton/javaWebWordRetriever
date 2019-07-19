@@ -12,8 +12,8 @@ public class fileCompare {
 
         try {
 
-            InputStreamReaderEx f1 = new InputStreamReaderEx();        //Create an instance of filereader
-            ArrayList<String> a = new ArrayList<String>();
+            fileManagment f1 = new fileManagment();
+//          ArrayList<String> a = new ArrayList<String>();
 
             //Adds file output to an arraylist
             for (int i = 0; i < 2; i++) {
