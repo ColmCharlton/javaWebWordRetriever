@@ -1,14 +1,6 @@
-Jenkinsfile (Declarative Pipeline)
-pipeline {
-    agent any
-    tools {
-        maven mvn 
-    }
-    stages {
-        stage('Example') {
-            steps {
-                sh 'mvn --version'
-            }
-        }
-    }
-}
+stagetage 'Access repository'
+	node {
+
+		checkout scm			
+	}
+ 
