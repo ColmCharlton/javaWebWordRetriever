@@ -1,22 +1,31 @@
-stage 'Access repository'
-node {
+pipeline {
 
-    git branch: 'master', 
-    url: 'https://github.com/ColmCharlton/javaWebWordRetriever'
-		
+    agent any
+
+    tools {
+
+        maven ‘mvn’
+
+    }
+
+    stages {
+			stage 'Access repository'
+			node {
+
+			git branch: 'master', 
+			url: 'https://github.com/ColmCharlton/javaWebWordRetriever'
+				
 	}
+        stage('Example') {
 
+            steps {
 
-stage 'Tools'
-tools {
+                sh 'mvn --version'
 
-     maven ‘mvn’
+            }
 
-    }
-
-stage('mvn') 
-node {
-
-    sh 'mvn --version'
+        }
 
     }
+
+}
