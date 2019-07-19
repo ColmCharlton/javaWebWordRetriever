@@ -1,6 +1,7 @@
-stagetage 'Access repository'
-	node {
+stage 'Access repository'
+node {
 
-		checkout scm			
+    git branch: 'modify', 
+    url: 'https://github.com/ColmCharlton/SystemInfo'
+		
 	}
- 
