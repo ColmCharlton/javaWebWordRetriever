@@ -9,7 +9,11 @@ pipeline {
     }
 
     stages {
-
+	stage 'Access repository'
+	node {
+	
+	checkout scm
+	}
         stage('Example') {
 
             steps {
