@@ -27,7 +27,7 @@ public class fileCompare {
             System.out.println("Are they the same ?   ");
             System.out.println(retrievedFiles.get(0).contains(retrievedFiles.get(1)));
 
-            //Comparers the arraylist elements, checks if they are the same, if so returns the difference
+            //Compares the arraylist elements, checks if they are the same, if so returns the difference
             if (retrievedFiles.get(0).contains(retrievedFiles.get(1)) == false) {
                 ArrayList<String> b = new ArrayList<String>();
                 for (String w : retrievedFiles.get(0).split(" ")) {

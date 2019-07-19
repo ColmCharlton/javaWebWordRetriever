@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 //import java.util.stream.Collectors;
@@ -134,8 +136,13 @@ public class run {
 
 
         //Need to fix this
-        fileCompare1.sortCompare(fileRetrieval.fileChecker("C:\\Java\\javaWordWebRetriever", "n"));
-        fileCompare2.sortCompare(fileRetrieval2.fileChecker("C:\\Java\\javaWordWebRetriever", "n"));
+
+        Path currentRelativePath = Paths.get("");
+        String s = currentRelativePath.toAbsolutePath().toString();
+        System.out.println("Current relative path is: " + s);
+
+        fileCompare1.sortCompare(fileRetrieval.fileChecker(s, "n"));
+        fileCompare2.sortCompare(fileRetrieval2.fileChecker(s, "n"));
 
     }
 }
