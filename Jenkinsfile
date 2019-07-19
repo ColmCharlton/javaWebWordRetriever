@@ -6,7 +6,7 @@ tools {
         maven ‘mvn’
 
     }
-
+stages {
 stage 'Access repository'
 node {
 	
@@ -18,5 +18,6 @@ node{
 	
 	sh 'mvn --veresion'
 	
+	}
 	}
 }
