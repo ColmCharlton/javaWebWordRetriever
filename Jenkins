@@ -1,31 +1,14 @@
+Jenkinsfile (Declarative Pipeline)
 pipeline {
-
     agent any
-
     tools {
-
-        maven ‘mvn’
-
+        maven mvn 
     }
-
     stages {
-			stage 'Access repository'
-			node {
-
-			git branch: 'master', 
-			url: 'https://github.com/ColmCharlton/javaWebWordRetriever'
-				
-	}
         stage('Example') {
-
             steps {
-
                 sh 'mvn --version'
-
             }
-
         }
-
     }
-
 }
