@@ -1,7 +1,5 @@
 stage 'Access repository'
 node {
-
-    git branch: 'modify', 
-    url: 'https://github.com/ColmCharlton/SystemInfo'
-		
+	
+	checkout scm
 	}
