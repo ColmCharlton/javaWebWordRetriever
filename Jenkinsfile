@@ -1,30 +1,13 @@
 pipeline {
-
     agent any
-
     tools {
-
-        maven ‘mvn’
-
+        maven 'apache-maven-3.0.1' 
     }
-
     stages {
-	
-	stage 'Access repository'{
-	steps {
-	
-		checkout scm
-		}
-	}
-    stage('Example') {
-	steps {
-            sh 'mvn --version'
+        stage('Example') {
+            steps {
+                sh 'mvn --version'
             }
-
         }
-
     }
-
 }
-
- 
