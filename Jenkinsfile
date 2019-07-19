@@ -10,9 +10,9 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Example') {
+        stage('Maven') {
             steps {
-                sh 'mvn --version'
+                sh 'mvn clean verify'
             }
         }
     }
