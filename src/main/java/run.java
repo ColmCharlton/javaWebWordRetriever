@@ -131,8 +131,11 @@ public class run {
         fileCompare fileCompare1 = new fileCompare();
         fileCompare fileCompare2 = new fileCompare();
 
-        fileCompare1.sortCompare(fileRetrieval.fileChecker("C:\\Users\\ccharlton\\IdeaProjects\\cc", "n"));
-        fileCompare2.sortCompare(fileRetrieval2.fileChecker("C:\\Users\\ccharlton\\IdeaProjects\\cc", "n"));
+
+
+        //Need to fix this
+        fileCompare1.sortCompare(fileRetrieval.fileChecker("C:\\Java\\javaWordWebRetriever", "n"));
+        fileCompare2.sortCompare(fileRetrieval2.fileChecker("C:\\Java\\javaWordWebRetriever", "n"));
 
     }
 }

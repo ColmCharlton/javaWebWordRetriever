@@ -13,28 +13,28 @@ public class fileCompare {
         try {
 
             fileManagment f1 = new fileManagment();
-//          ArrayList<String> a = new ArrayList<String>();
+            ArrayList<String> retrievedFiles = new ArrayList<String>();
 
             //Adds file output to an arraylist
             for (int i = 0; i < 2; i++) {
-                a.add(f1.fileIn(files[i].getName()));
+                retrievedFiles.add(f1.fileIn(files[i].getName()));
 
             }
-            for (int i = 0; i < a.size(); i++) {
+            for (int i = 0; i < retrievedFiles.size(); i++) {
 //                System.out.println(a.get(i));
             }
 
             System.out.println("Are they the same ?   ");
-            System.out.println(a.get(0).contains(a.get(1)));
+            System.out.println(retrievedFiles.get(0).contains(retrievedFiles.get(1)));
 
             //Comparers the arraylist elements, checks if they are the same, if so returns the difference
-            if (a.get(0).contains(a.get(1)) == false) {
+            if (retrievedFiles.get(0).contains(retrievedFiles.get(1)) == false) {
                 ArrayList<String> b = new ArrayList<String>();
-                for (String w : a.get(0).split(" ")) {
+                for (String w : retrievedFiles.get(0).split(" ")) {
                     b.add(w);
                 }
                 ArrayList<String> c = new ArrayList<String>();
-                for (String w : a.get(1).split(" ")) {
+                for (String w : retrievedFiles.get(1).split(" ")) {
                     c.add(w);
                 }
 

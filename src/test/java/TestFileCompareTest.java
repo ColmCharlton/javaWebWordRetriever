@@ -13,7 +13,7 @@ public class TestFileCompareTest {
         fileRetrieval fileRetrieval = new fileRetrieval();
         File files [];
 //        files = [ExclusionList.txt, ExclusionList_Keywords.txt]
-        files = fileRetrieval.fileChecker("C:\\Users\\ccharlton\\IdeaProjects\\cc", "k");
+        files = fileRetrieval.fileChecker("C:\\Java\\javaWordWebRetriever", "k");
         String output = fileCompare.sortCompare(files);
         Assert.assertNotNull(output);
 

@@ -10,7 +10,7 @@ public class TestFileManager {
     @Test
     public void testFileIn() throws IOException {
         fileManagment fileManagment = new fileManagment();
-        String out = fileManagment.fileIn("url.txt");
+        String out = fileManagment.fileIn("ExclusionList.txt");
         Assert.assertFalse(out.isEmpty());
     }
 
