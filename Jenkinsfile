@@ -7,7 +7,7 @@ pipeline {
 	
 		stage('Repo retrieval') {
             steps {
-                sh 'checkout scm '
+                checkout scm
             }
         }
         stage('Example') {
