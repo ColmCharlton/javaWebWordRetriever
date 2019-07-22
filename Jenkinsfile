@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Maven build and test') {
             steps {
-                sh 'mvn clean verify'
+                sh 'mvn test'
             }
         }
 }
