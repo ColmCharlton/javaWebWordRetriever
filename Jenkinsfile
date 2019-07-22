@@ -15,10 +15,9 @@ pipeline {
                 sh 'mvn clean verify'
             }
         }
-        stage('Archieve'){
+        stage('Archieval'){
             steps{
-            archiveArtifacts 'C:\\Users\\ccharlton\\.jenkins\\workspace\\javaNounExtractor\\target*.jar'
-            }
+                   archiveArtifacts 'target/*.jar' }
         }
 
 
@@ -44,9 +43,6 @@ pipeline {
             }
 
         }
-
-
-
     }
 }
 
