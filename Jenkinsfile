@@ -40,19 +40,9 @@ pipeline {
         }
 
 
-        // limit concurrency so we don't perform simultaneous deploys
-        // and if multiple pipelines are executing,
-        // newest is only that will be allowed through, rest will be canceled
 
-
-        stage('Build docker container') {
-            steps {
-                // deploy to a docker container mapped to port 80
-                // on windows use: bat 'docker-compose up -d --build'
-                //bat 'docker-compose up -d --build'
-
-                notify 'Deployed!'
-            }
+            notify 'Ran successfully!'
+            
 
         }
     }
