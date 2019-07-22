@@ -16,6 +16,7 @@ pipeline {
             steps {
                 sh 'mvn clean verify'
             }
+        }
         stage('Archieve'){
             steps{
             archiveArtifacts 'C:\\Users\\ccharlton\\.jenkins\\workspace\\javaNounExtractor\\target*.jar'
@@ -42,13 +43,13 @@ pipeline {
             notify 'Deployed!'
             }
 
-}
+        }
 
 
 
+    }
 }
-}
-}
+
 def notify(status){
     emailext (
       to: "wesmdemos@gmail.com",
