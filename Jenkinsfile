@@ -5,10 +5,10 @@ pipeline {
     }
     stages {
         stage('Repo retrieval') {
-                steps {
-                    checkout scm
-                }
+            steps {
+                checkout scm
             }
+        }
 
         stage('Maven build and test') {
             steps {
@@ -36,8 +36,6 @@ pipeline {
 
         stage('Archival2') {
             steps {
-                //archival
-                stage('archival')
                 publishHTML([allowMissing         : false,
                              alwaysLinkToLastBuild: false,
                              keepAll              : false, reportDir: 'target\\site\\jacoco',
