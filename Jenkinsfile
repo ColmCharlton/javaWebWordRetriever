@@ -6,14 +6,9 @@ pipeline {
     stages {
         stage('Repo retrieval') {
             steps {
-                try {
-                    checkout scm
+                 checkout scm
 //                    git 'https://github.com/ColmCharlton/javaWebWordRetriever'
 //                    git branch: 'modify', url: 'https://github.com/ColmCharlton/javaWebWordRetriever'
-                } catch (err) {
-                    notify("Error ${err}")
-                    currentBuild.result = 'Failure'
-                }
             }
         }
 
