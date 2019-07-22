@@ -20,19 +20,19 @@ pipeline {
         //dir(project_path)
 
 
-        stage('Archival') {
-            steps {
-                publishHTML(target: [
-                        allowMissing         : false,
-                        alwaysLinkToLastBuild: false,
-                        keepAll              : true,
-                        reportDir            : 'coverage',
-                        reportFiles          : 'index.html',
-                        reportName           : "Report"
-                ])
-                archiveArtifacts 'target/*.jar'
-            }
-        }
+//        stage('Archival') {
+//            steps {
+//                publishHTML(target: [
+//                        allowMissing         : false,
+//                        alwaysLinkToLastBuild: false,
+//                        keepAll              : true,
+//                        reportDir            : 'coverage',
+//                        reportFiles          : 'index.html',
+//                        reportName           : "Report"
+//                ])
+//                archiveArtifacts 'target/*.jar'
+//            }
+//        }
 
         stage('Archival2') {
             steps {
