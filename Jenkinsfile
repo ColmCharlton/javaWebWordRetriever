@@ -15,10 +15,17 @@ pipeline {
                 sh 'mvn clean verify'
             }
         }
-        //stage('Archival'){
-        //    steps{
-        //           archiveArtifacts 'target/*.jar' }
-        //}
+        stage('Archival') {
+                    publishHTML(target: [allowMissing         : true,
+                                         alwaysLinkToLastBuild: false,
+                                         keepAll              : true,
+                                         reportDir            : 'target/site/jacoco',
+                                         reportFiles          : 'index.html',
+                                         reportName           : 'Code Coverage',
+                                         reportTitles         : ''])
+                    archiveArtifacts allowEmptyArchive: true, artifacts: '*.txt'
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'target/*.jar'
+                }
 
 
         // limit concurrency so we don't perform simultaneous deploys
@@ -37,7 +44,7 @@ pipeline {
         steps {
             // deploy to a docker container mapped to port 80
             // on windows use: bat 'docker-compose up -d --build'
-            //bat 'docker-compose up -d --build'
+            bat 'docker-compose up -d --build'
 
             notify 'Deployed!'
             }
