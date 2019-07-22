@@ -16,16 +16,18 @@ pipeline {
             }
         }
         stage('Archival') {
+        steps {
                     publishHTML(target: [allowMissing         : true,
-                                         alwaysLinkToLastBuild: false,
-                                         keepAll              : true,
-                                         reportDir            : 'target/site/jacoco',
-                                         reportFiles          : 'index.html',
-                                         reportName           : 'Code Coverage',
-                                         reportTitles         : ''])
-                    archiveArtifacts allowEmptyArchive: true, artifacts: '*.txt'
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'target/*.jar'
-                }
+                                                             alwaysLinkToLastBuild: false,
+                                                             keepAll              : true,
+                                                             reportDir            : 'target/site/jacoco',
+                                                             reportFiles          : 'index.html',
+                                                             reportName           : 'Code Coverage',
+                                                             reportTitles         : ''])
+                                        archiveArtifacts allowEmptyArchive: true, artifacts: '*.txt'
+                                        archiveArtifacts allowEmptyArchive: true, artifacts: 'target/*.jar'
+                                    }
+                    }
 
 
         // limit concurrency so we don't perform simultaneous deploys
