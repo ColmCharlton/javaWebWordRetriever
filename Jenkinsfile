@@ -15,23 +15,23 @@ pipeline {
                 sh 'mvn clean verify'
             }
         }
-        stage('Archieval'){
-            steps{
-                   archiveArtifacts 'target/*.jar' }
-        }
+        //stage('Archival'){
+        //    steps{
+        //           archiveArtifacts 'target/*.jar' }
+        //}
 
 
         // limit concurrency so we don't perform simultaneous deploys
         // and if multiple pipelines are executing,
         // newest is only that will be allowed through, rest will be canceled
 
-        stage('Deploy to staging'){
+        //stage('Deploy to staging'){
             // write build number to index page so we can see this update
             // on windows use:
-            steps {
-            bat "echo '<h1>${env.BUILD_DISPLAY_NAME}</h1>' >> app/index.html"
-                                    }
-            }
+         //   steps {
+         //   bat "echo '<h1>${env.BUILD_DISPLAY_NAME}</h1>' >> app/index.html"
+         //                           }
+         //   }
 
         stage('Deploy to docker'){
         steps {
