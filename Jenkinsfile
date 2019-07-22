@@ -21,7 +21,7 @@ pipeline {
         // and if multiple pipelines are executing,
         // newest is only that will be allowed through, rest will be canceled
 
-        stage name: 'Deploy to staging', concurrency: 1{
+        stage('Deploy to staging'){
             // write build number to index page so we can see this update
             // on windows use: bat "echo '<h1>${env.BUILD_DISPLAY_NAME}</h1>' >> app/index.html"
             //bat "echo '<h1>${env.BUILD_DISPLAY_NAME}</h1>' >> app\index.html"
