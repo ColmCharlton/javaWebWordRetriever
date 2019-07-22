@@ -25,12 +25,14 @@ pipeline {
             // write build number to index page so we can see this update
             // on windows use: bat "echo '<h1>${env.BUILD_DISPLAY_NAME}</h1>' >> app/index.html"
             //bat "echo '<h1>${env.BUILD_DISPLAY_NAME}</h1>' >> app\index.html"
-
+    steps {
             // deploy to a docker container mapped to port 80
             // on windows use: bat 'docker-compose up -d --build'
             bat 'docker-compose up -d --build'
 
             notify 'Solitaire Deployed!'
+            }
+
 }
 
 
