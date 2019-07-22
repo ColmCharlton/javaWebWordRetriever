@@ -40,10 +40,12 @@ pipeline {
         }
 
 
-
+		stage('Notify User') {
+            steps {
         notify 'Ran successfully!'
 
-
+			}
+		}
     }
 }
 
