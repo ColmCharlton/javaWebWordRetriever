@@ -15,13 +15,7 @@ pipeline {
                 sh 'mvn clean verify'
             }
         }
-        stage('Maven build and test') {
-             steps {
-                 sh 'mvn clean verify'
-            }
-         }
-
-
+        
     stage name: 'Deploy to staging', concurrency: 1
     node {
         // write build number to index page so we can see this update
