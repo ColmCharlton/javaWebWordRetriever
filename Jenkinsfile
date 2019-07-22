@@ -7,8 +7,6 @@ pipeline {
 	
 		stage('Repo retrieval') {
             steps {
-                //git 'https://github.com/ColmCharlton/javaWebWordRetriever'
-                //git branch: 'modify', url: 'https://github.com/ColmCharlton/javaWebWordRetriever'
                 checkout scm
             }
         }
