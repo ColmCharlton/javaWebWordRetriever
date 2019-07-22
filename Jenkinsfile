@@ -49,7 +49,7 @@ pipeline {
             steps {
                 // deploy to a docker container mapped to port 80
                 // on windows use: bat 'docker-compose up -d --build'
-                // bat 'docker-compose up -d --build'
+                 bat 'docker-compose up -d --build'
 
                 notify 'Deployed!'
             }
