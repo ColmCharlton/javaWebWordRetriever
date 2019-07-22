@@ -4,12 +4,16 @@ pipeline {
         maven 'mvn3.6.1'
     }
     stages {
-        try {
             stage('Repo retrieval') {
                 steps {
-                    checkout scm
+                    try {
+                        checkout scm
 //                    git 'https://github.com/ColmCharlton/javaWebWordRetriever'
 //                    git branch: 'modify', url: 'https://github.com/ColmCharlton/javaWebWordRetriever'
+                    } catch (err) {
+                            notify("Error ${err}")
+                            currentBuild.result = 'Failure'
+                        }
                 }
             }
 
@@ -36,7 +40,7 @@ pipeline {
                     step([$class     : 'JUnitResultArchiver',
                           testResults: 'target/surefire-reports/TEST-*.xml'])
 
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'target/*.?ar'
+                    archiveArtifacts 'target/*.?ar'
                 }
             }
 
@@ -56,9 +60,6 @@ pipeline {
                 }
 
             }
-        } catch (err) {
-            notify("Error ${err}")
-            currentBuild.result = 'Failure'
         }
     }
 }
