@@ -36,7 +36,7 @@ pipeline {
                     step([$class     : 'JUnitResultArchiver',
                           testResults: 'target/surefire-reports/TEST-*.xml'])
 
-                    archiveArtifacts 'target/*.?ar'
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'target/*.?ar'
                 }
             }
 
