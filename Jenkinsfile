@@ -41,7 +41,13 @@ pipeline {
 
         stage('Publish html') {
                     steps {
-        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'C:\\Users\\ccharlton\\.jenkins\\workspace\\javaNounExtractor\\\'nouns19-07-19 16-55-38.txt\'', reportFiles: 'index.html', reportName: 'Noun Report', reportTitles: ''])
+        publishHTML([allowMissing: false,
+                    alwaysLinkToLastBuild: false,
+                    keepAll: true,
+                    reportDir: 'C:\\Users\\ccharlton\\.jenkins\\workspace\\javaNounExtractor\\\nouns19-07-19 16-55-38.txt\',
+                    reportFiles: 'index.html',
+                    reportName: 'Noun Report',
+                    reportTitles: ''])
         }
     }
 
