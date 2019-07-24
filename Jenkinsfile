@@ -53,8 +53,8 @@ pipeline {
 
                 archiveArtifacts 'target/*.?ar'
                 archiveArtifacts allowEmptyArchive: true, artifacts: '*.txt'
-                archiveArtifacts allowEmptyArchive: true, artifacts: 'R*.txt'
-                archiveArtifacts allowEmptyArchive: true, artifacts: 'n*.txt'
+                //archiveArtifacts allowEmptyArchive: true, artifacts: 'R*.txt'
+                //archiveArtifacts allowEmptyArchive: true, artifacts: 'n*.txt'
             }
         }
 
