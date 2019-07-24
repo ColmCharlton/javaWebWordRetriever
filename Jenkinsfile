@@ -3,8 +3,6 @@ pipeline {
      triggers{
      //re-triggers pipeline on regular intervals
      cron('H H(9-16)/2 * * 1-5')
-     }
-     triggers {
      //re-triggers pipeline new source changes
      pollSCM('H */4 * * 1-5')
      }
