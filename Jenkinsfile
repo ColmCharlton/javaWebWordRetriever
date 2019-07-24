@@ -21,7 +21,7 @@ pipeline {
 
         stage('Maven build and run') {
             steps {
-                sh 'mvn clean package'
+         //       sh 'mvn clean package'
 
             }
         }
@@ -51,6 +51,8 @@ pipeline {
 
                 archiveArtifacts 'target/*.?ar'
                 archiveArtifacts allowEmptyArchive: true, artifacts: '*.txt'
+                archiveArtifacts allowEmptyArchive: true, artifacts: 'R*.txt'
+                archiveArtifacts allowEmptyArchive: true, artifacts: 'n*.txt'
             }
         }
 
