@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class fileCompare {
 
 
+    //This should be two classes sort and compare
 
     public String sortCompare(File[] files) {
         // try-catch block to handle exceptions
@@ -22,24 +23,29 @@ public class fileCompare {
 //                System.out.println(a.get(i));
             }
 
+
+
+
+
             System.out.println("Are they the same ?   ");
+            //Checks to see if the files are similiar
             System.out.println(retrievedFiles.get(0).contains(retrievedFiles.get(1)));
-
-            //Compares the arraylist elements, checks if they are the same, if so returns the difference
+            //Compares the arraylist elements, checks if they are the same, if so returns the difference, if not it breaks the loop and returns
             if (retrievedFiles.get(0).contains(retrievedFiles.get(1)) == false) {
-                ArrayList<String> b = new ArrayList<String>();
+                ArrayList<String> file1 = new ArrayList<String>();
                 for (String w : retrievedFiles.get(0).split(" ")) {
-                    b.add(w);
+                    file1.add(w);
                 }
-                ArrayList<String> c = new ArrayList<String>();
+                ArrayList<String> file2 = new ArrayList<String>();
                 for (String w : retrievedFiles.get(1).split(" ")) {
-                    c.add(w);
+                    file2.add(w);
                 }
 
-                b.removeAll(c);
-                System.out.println("\nDifference between files is " + b);
+//                remove similiar words
+                file1.removeAll(file2);
+                System.out.println("Difference between files is " + file2);
 
-                String result = String.join(" ", b);
+                String result = String.join(" ", file1);
 //                        System.out.println("\nDifference between fileRetrievalSortComapre is " + result);
 
                 return result;

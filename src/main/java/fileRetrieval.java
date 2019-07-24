@@ -42,10 +42,10 @@ public class fileRetrieval {
             System.out.println("Files are:");
 
 
-            //Sort array of fileRetrievalSortComapre in decending order
+            //Sort array of fileRetrievalSortComapre in descending order
             Arrays.sort(getFiles(), Collections.reverseOrder());
 
-            // Display the names of the fileRetrievalSortComapre
+            // Display the names of the fileRetrievalSortCompare
             for (int i = 0; i < 2; i++) {
                 System.out.println(getFiles()[i].getName());
             }

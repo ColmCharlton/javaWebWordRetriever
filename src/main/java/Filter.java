@@ -5,6 +5,9 @@ import java.util.regex.Pattern;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
+
+//COULD INDIVIDUAL METHODS HERE TO ADD MODULARITY TO CLASS
+
 public class Filter {
 
     public Filter(String contentOfUrl) { //default constructor

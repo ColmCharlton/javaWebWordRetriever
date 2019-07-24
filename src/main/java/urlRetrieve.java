@@ -1,9 +1,5 @@
-//package de.vogella.regex.test;
-
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 import java.net.URL;
@@ -13,6 +9,7 @@ import java.net.URL;
 
 public class urlRetrieve {
 
+    //WROTE SPECIFICALLY FOR TESTS TO ENSURE URL RETURNED 200 RESPONSE
     public int urlCodeCheck(String webSite) throws IOException {
         URL url = new URL(webSite);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -25,7 +22,7 @@ public class urlRetrieve {
         return code;
     }
 
-
+//CALLS URL APPENDS TO STRING AND RETURNS, ASSUMING THE IF CONDITION ARE MET
     public static String callURL(String myURL) {
         System.out.println("Requeted URL:" + myURL);
         StringBuilder sb = new StringBuilder();

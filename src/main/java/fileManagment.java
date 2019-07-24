@@ -4,6 +4,9 @@ import java.util.Date;
 
 public class fileManagment {
 
+    //TWO CLASSES NEEDED HERE, COULD USE AN INTERFACE CALLED FILE MANAGEMENT THAT TAKES TOW METHODS FILEIN AND WRITEFILE
+
+
     // //Reads from file
     public String fileIn(String file) throws IOException { // How to read file into String before Java 7
         InputStream is = new FileInputStream(file);
