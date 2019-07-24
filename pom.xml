@@ -11,6 +11,17 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+<!--                <includes>-->
+<!--                    <include>**/*.txt</include>-->
+<!--                </includes>-->
+<!--                <excludes>-->
+<!--                    <exclude>**/*test*.*</exclude>-->
+<!--                </excludes>-->
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <!-- Build an executable JAR -->
@@ -20,8 +31,6 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
                             <mainClass>run</mainClass>
                         </manifest>
                     </archive>
@@ -86,8 +95,5 @@
             <version>5.4.2</version>
             <scope>test</scope>
         </dependency>
-
-
     </dependencies>
-
 </project>

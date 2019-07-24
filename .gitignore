@@ -3,3 +3,5 @@
 *.idea/.name
 *.idea/workspace.xml
 *.target/
+*editJenkinsfile.groovy
+*target/
