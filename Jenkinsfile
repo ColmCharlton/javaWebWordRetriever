@@ -1,5 +1,14 @@
 pipeline {
     agent any
+     triggers{
+     //re-triggers pipeline on regular intervals
+     cron('H H(9-16)/2 * * 1-5')
+     }
+     triggers {
+     //re-triggers pipeline new source changes
+     pollSCM('H */4 * * 1-5')
+     }
+
     tools {
         maven 'mvn3.6.1'
     }
@@ -36,6 +45,7 @@ pipeline {
                       testResults: 'target/surefire-reports/TEST-*.xml'])
 
                 archiveArtifacts 'target/*.?ar'
+                archiveArtifacts allowEmptyArchive: true, artifacts: '*.txt'
             }
         }
 

@@ -7,9 +7,7 @@ pipeline {
         stage('Repo retrieval') {
             steps {
                 checkout scm
-//                    git 'https://github.com/ColmCharlton/javaWebWordRetriever'
-//                    git branch: 'modify', url: 'https://github.com/ColmCharlton/javaWebWordRetriever'
-            }
+          }
         }
 
         stage('Maven build and test') {
@@ -36,6 +34,7 @@ pipeline {
                       testResults: 'target/surefire-reports/TEST-*.xml'])
 
                 archiveArtifacts 'target/*.?ar'
+                archiveArtifacts 'target/*.?ar'
             }
         }
 
@@ -44,8 +43,8 @@ pipeline {
                 publishHTML([allowMissing: false,
                              alwaysLinkToLastBuild: false,
                              keepAll: true,
-                             reportDir: 'C:\\Users\\ccharlton\\.jenkins\\workspace\\javaNounExtractor',
-                             reportFiles: 'nouns19-07-19 16-55-38.txt',
+                             reportDir: 'C:\\Users\\ccharlton\\.jenkins\\workspace\\javaNounExtractor\\SavedFiles',
+                             reportFiles: 'nouns.html',
                              reportName: 'Noun Report',
                              reportTitles: ''])
             }
