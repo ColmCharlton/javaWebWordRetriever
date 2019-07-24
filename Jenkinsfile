@@ -1,11 +1,11 @@
 pipeline {
     agent any
-     triggers{
-     //re-triggers pipeline on regular intervals
-     cron('H H(9-16)/2 * * 1-5')
-     //re-triggers pipeline new source changes
-     pollSCM('H */4 * * 1-5')
-     }
+    triggers{
+        //re-triggers pipeline on regular intervals
+        cron('H H(9-16)/2 * * 1-5')
+        //re-triggers pipeline new source changes
+        pollSCM('H */4 * * 1-5')
+    }
 
     tools {
         maven 'mvn3.6.1'
@@ -19,9 +19,15 @@ pipeline {
             }
         }
 
-        stage('Maven build and test') {
+        stage('Maven build and run') {
             steps {
                 sh 'mvn clean package'
+
+            }
+        }
+
+        stage('Maven build and test') {
+            steps {
                 sh 'mvn test'
             }
         }
@@ -51,12 +57,12 @@ pipeline {
         stage('Publish html') {
             steps {
                 publishHTML([allowMissing: false,
-                alwaysLinkToLastBuild: false,
-                keepAll: true,
-                reportDir: 'C:\\Users\\ccharlton\\.jenkins\\workspace\\javaNounExtractor\\SavedFiles',
-                reportFiles: 'nouns.html',
-                reportName: 'Noun Report',
-                reportTitles: ''])
+                             alwaysLinkToLastBuild: false,
+                             keepAll: true,
+                             reportDir: 'C:\\Users\\ccharlton\\.jenkins\\workspace\\javaNounExtractor\\SavedFiles',
+                             reportFiles: 'nouns.html',
+                             reportName: 'Noun Report',
+                             reportTitles: ''])
             }
         }
 
