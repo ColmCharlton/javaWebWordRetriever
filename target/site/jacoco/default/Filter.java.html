@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Filter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cc</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Filter.java</span></div><h1>Filter.java</h1><pre class="source lang-java linenums">import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+
+
+//COULD INDIVIDUAL METHODS HERE TO ADD MODULARITY TO CLASS
+
+public class Filter {
+
+<span class="fc" id="L13">    public Filter(String contentOfUrl) { //default constructor</span>
+<span class="fc" id="L14">        this.contentOfUrl = contentOfUrl;</span>
+<span class="fc" id="L15">    }</span>
+
+
+    private String contentOfUrl;
+<span class="fc" id="L19">    private final String para = &quot;&lt;p&gt;(.*?)&lt;/p\\&gt;&quot;;</span>
+<span class="fc" id="L20">    private final String hTag = &quot;&lt;h\\d&gt;(.*?)&lt;/h\\d&gt;&quot;;</span>
+<span class="fc" id="L21">    private final String hTagClass = &quot;&lt;h\\d.*?&gt;(.*?)&lt;/h\\d&gt;&quot;;</span>
+<span class="fc" id="L22">    private final String span = &quot;&lt;span.*?&gt;(.*?)&lt;/span&gt;&quot;;</span>
+<span class="fc" id="L23">    private final String textInBrackets = &quot;\\&gt;(.*?)\\&lt;&quot;;</span>
+<span class="fc" id="L24">    private final String whiteSpace = &quot;\\s+&quot;;</span>
+<span class="fc" id="L25">    private final String NonNumericalAlphbetic = &quot;[^A-Za-z0-9]+&quot;;</span>
+<span class="fc" id="L26">    private final String removeSingleCharcaters = &quot;\\b\\w{1,1}\\b&quot;;</span>
+<span class="fc" id="L27">    private final String justWords = &quot;\\d&quot;;</span>
+<span class="fc" id="L28">    private final String words = &quot;\\W&quot;;</span>
+
+
+    private String text;
+    private String wordsFinal;
+
+
+    public String getContentOfUrl() {
+<span class="fc" id="L36">        return contentOfUrl;</span>
+    }
+
+    public String getPara() {
+<span class="fc" id="L40">        return para;</span>
+    }
+
+    public String gethTag() {
+<span class="fc" id="L44">        return hTag;</span>
+    }
+
+    public String gethTagClass() {
+<span class="fc" id="L48">        return hTagClass;</span>
+    }
+
+    public String getSpan() {
+<span class="fc" id="L52">        return span;</span>
+    }
+
+    public String getTextInBrackets() {
+<span class="fc" id="L56">        return textInBrackets;</span>
+    }
+
+    public String getWhiteSpace() {
+<span class="fc" id="L60">        return whiteSpace;</span>
+    }
+
+    public String getNonNumericalAlphbetic() {
+<span class="fc" id="L64">        return NonNumericalAlphbetic;</span>
+    }
+
+    public String getRemoveSingleCharcaters() {
+<span class="fc" id="L68">        return removeSingleCharcaters;</span>
+    }
+
+    public String getJustWords() {
+<span class="fc" id="L72">        return justWords;</span>
+    }
+
+    public String getWords() {
+<span class="nc" id="L76">        return words;</span>
+    }
+
+
+    public String getText() {
+<span class="nc" id="L81">        return text;</span>
+    }
+
+    public void setText(String text) {
+<span class="nc" id="L85">        this.text = text;</span>
+<span class="nc" id="L86">    }</span>
+
+    public String getWordsFinal() {
+<span class="nc" id="L89">        return wordsFinal;</span>
+    }
+
+    public void setWordsFinal(String wordsFinal) {
+<span class="fc" id="L93">        this.wordsFinal = wordsFinal;</span>
+<span class="fc" id="L94">    }</span>
+
+
+
+
+
+
+
+
+    public String find() {
+        //Find needed content
+        try {
+<span class="fc" id="L106">            String contentWithoutSpaces = getContentOfUrl().replaceAll(getWhiteSpace(), &quot; &quot;);</span>
+
+
+<span class="fc" id="L109">            String paragraphes = matcher(getPara(), contentWithoutSpaces);</span>
+
+<span class="fc" id="L111">            String hTags = matcher(gethTag(), contentWithoutSpaces);</span>
+
+<span class="fc" id="L113">            String hTagsClasses = matcher(gethTagClass(), contentWithoutSpaces);</span>
+
+<span class="fc" id="L115">            String spanTags = matcher(getSpan(), contentWithoutSpaces);</span>
+
+<span class="fc" id="L117">            String combined = paragraphes + hTags + hTagsClasses + spanTags;</span>
+
+<span class="fc" id="L119">            String text = matcher(getTextInBrackets(), combined);</span>
+
+//    }
+//
+//
+//    //Remove unwanted content
+//    public void remove() {
+<span class="fc" id="L126">            String allNonNumericalAlphbetic = text.replaceAll(getNonNumericalAlphbetic(), &quot; &quot;);</span>
+
+<span class="fc" id="L128">            String onlyWords = allNonNumericalAlphbetic.replaceAll(getJustWords(), &quot; &quot;);</span>
+
+<span class="fc" id="L130">            String minusSingleCharacters = onlyWords.replaceAll(getRemoveSingleCharcaters(), &quot; &quot;);</span>
+
+<span class="fc" id="L132">            String wordsFinal = minusSingleCharacters.replaceAll(getJustWords(), &quot; &quot;);</span>
+
+<span class="fc" id="L134">            setWordsFinal(wordsFinal.toLowerCase());</span>
+
+<span class="pc bpc" id="L136" title="1 of 2 branches missed.">            if (wordsFinal == null)</span>
+<span class="nc" id="L137">            return null;</span>
+            else
+<span class="fc" id="L139">                return wordsFinal;</span>
+<span class="nc" id="L140">        }catch(Exception e){</span>
+<span class="nc" id="L141">            System.out.println(&quot; Error in filter step&quot; +  e);</span>
+<span class="nc" id="L142">            return null;</span>
+        }
+    }
+
+
+    public String matcher(String pattern, String content)
+    {
+
+        try {
+            // Create a Pattern object
+<span class="fc" id="L152">            Pattern p = Pattern.compile(pattern);</span>
+            // Now create matcher object.
+<span class="fc" id="L154">            Matcher m = p.matcher(content);</span>
+
+<span class="fc" id="L156">            String finds = null;</span>
+
+<span class="fc bfc" id="L158" title="All 2 branches covered.">            while (m.find()) {</span>
+<span class="fc" id="L159">                finds += m.group();</span>
+            }
+<span class="fc bfc" id="L161" title="All 2 branches covered.">            if (finds == null)</span>
+<span class="fc" id="L162">            return null;</span>
+            else
+<span class="fc" id="L164">                return finds;</span>
+<span class="nc" id="L165">        }catch (Exception e){</span>
+<span class="nc" id="L166">            return content;</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

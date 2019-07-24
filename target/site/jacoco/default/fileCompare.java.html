@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>fileCompare.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cc</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">fileCompare.java</span></div><h1>fileCompare.java</h1><pre class="source lang-java linenums">import java.io.File;
+import java.util.ArrayList;
+
+<span class="fc" id="L4">public class fileCompare {</span>
+
+
+    //This should be two classes sort and compare
+
+    public String sortCompare(File[] files) {
+        // try-catch block to handle exceptions
+
+        try {
+
+<span class="fc" id="L14">            fileManagment f1 = new fileManagment();</span>
+<span class="fc" id="L15">            ArrayList&lt;String&gt; retrievedFiles = new ArrayList&lt;String&gt;();</span>
+
+            //Adds file output to an arraylist
+<span class="fc bfc" id="L18" title="All 2 branches covered.">            for (int i = 0; i &lt; 2; i++) {</span>
+<span class="fc" id="L19">                retrievedFiles.add(f1.fileIn(files[i].getName()));</span>
+
+            }
+<span class="fc bfc" id="L22" title="All 2 branches covered.">            for (int i = 0; i &lt; retrievedFiles.size(); i++) {</span>
+//                System.out.println(a.get(i));
+            }
+
+
+
+
+
+<span class="fc" id="L30">            System.out.println(&quot;Are they the same ?   &quot;);</span>
+            //Checks to see if the files are similiar
+<span class="fc" id="L32">            System.out.println(retrievedFiles.get(0).contains(retrievedFiles.get(1)));</span>
+            //Compares the arraylist elements, checks if they are the same, if so returns the difference, if not it breaks the loop and returns
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">            if (retrievedFiles.get(0).contains(retrievedFiles.get(1)) == false) {</span>
+<span class="nc" id="L35">                ArrayList&lt;String&gt; file1 = new ArrayList&lt;String&gt;();</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">                for (String w : retrievedFiles.get(0).split(&quot; &quot;)) {</span>
+<span class="nc" id="L37">                    file1.add(w);</span>
+                }
+<span class="nc" id="L39">                ArrayList&lt;String&gt; file2 = new ArrayList&lt;String&gt;();</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">                for (String w : retrievedFiles.get(1).split(&quot; &quot;)) {</span>
+<span class="nc" id="L41">                    file2.add(w);</span>
+                }
+
+//                remove similiar words
+<span class="nc" id="L45">                file1.removeAll(file2);</span>
+<span class="nc" id="L46">                System.out.println(&quot;Difference between files is &quot; + file2);</span>
+
+<span class="nc" id="L48">                String result = String.join(&quot; &quot;, file1);</span>
+//                        System.out.println(&quot;\nDifference between fileRetrievalSortComapre is &quot; + result);
+
+<span class="nc" id="L51">                return result;</span>
+
+            } else
+<span class="fc" id="L54">                System.out.println(&quot;Same as before&quot;);</span>
+<span class="fc" id="L55">            return &quot;Same as before&quot;;</span>
+
+
+<span class="nc" id="L58">        } catch (Exception e) {</span>
+<span class="nc" id="L59">            System.err.println(e.getMessage());</span>
+<span class="nc" id="L60">            return null;</span>
+        }
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

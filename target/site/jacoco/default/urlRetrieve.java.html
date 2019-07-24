@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>urlRetrieve.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cc</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">urlRetrieve.java</span></div><h1>urlRetrieve.java</h1><pre class="source lang-java linenums">import java.io.*;
+import java.net.HttpURLConnection;
+
+
+import java.net.URL;
+        import java.net.URLConnection;
+        import java.nio.charset.Charset;
+
+
+<span class="fc" id="L10">public class urlRetrieve {</span>
+
+    //WROTE SPECIFICALLY FOR TESTS TO ENSURE URL RETURNED 200 RESPONSE
+    public int urlCodeCheck(String webSite) throws IOException {
+<span class="fc" id="L14">        URL url = new URL(webSite);</span>
+<span class="fc" id="L15">        HttpURLConnection connection = (HttpURLConnection) url.openConnection();</span>
+<span class="fc" id="L16">        connection.setRequestMethod(&quot;GET&quot;);</span>
+<span class="fc" id="L17">        connection.connect();</span>
+
+<span class="fc" id="L19">        int code = connection.getResponseCode();</span>
+
+<span class="fc" id="L21">        System.out.println(code);</span>
+<span class="fc" id="L22">        return code;</span>
+    }
+
+//CALLS URL APPENDS TO STRING AND RETURNS, ASSUMING THE IF CONDITION ARE MET
+    public static String callURL(String myURL) {
+<span class="fc" id="L27">        System.out.println(&quot;Requeted URL:&quot; + myURL);</span>
+<span class="fc" id="L28">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L29">        URLConnection urlConn = null;</span>
+<span class="fc" id="L30">        InputStreamReader in = null;</span>
+        try {
+<span class="fc" id="L32">            URL url = new URL(myURL);</span>
+<span class="fc" id="L33">            urlConn = url.openConnection();</span>
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">            if (urlConn != null)</span>
+<span class="fc" id="L35">                urlConn.setReadTimeout(60 * 1000);</span>
+<span class="pc bpc" id="L36" title="2 of 4 branches missed.">            if (urlConn != null &amp;&amp; urlConn.getInputStream() != null) {</span>
+<span class="fc" id="L37">                in = new InputStreamReader(urlConn.getInputStream(),</span>
+<span class="fc" id="L38">                        Charset.defaultCharset());</span>
+<span class="fc" id="L39">                BufferedReader bufferedReader = new BufferedReader(in);</span>
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">                if (bufferedReader != null) {</span>
+                    int cp;
+<span class="fc bfc" id="L42" title="All 2 branches covered.">                    while ((cp = bufferedReader.read()) != -1) {</span>
+<span class="fc" id="L43">                        sb.append((char) cp);</span>
+                    }
+<span class="fc" id="L45">                    bufferedReader.close();</span>
+                }
+            }
+<span class="fc" id="L48">            in.close();</span>
+<span class="fc" id="L49">            return sb.toString();</span>
+<span class="nc" id="L50">        } catch (Exception e) {</span>
+<span class="nc" id="L51">            throw new RuntimeException(&quot;Exception while calling URL:&quot; + myURL, e);</span>
+        }
+    }
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

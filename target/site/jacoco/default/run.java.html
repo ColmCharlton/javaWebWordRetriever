@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>run.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cc</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">run.java</span></div><h1>run.java</h1><pre class="source lang-java linenums">import com.sun.org.apache.xpath.internal.compiler.Keywords;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.stream.Collectors;
+//import java.util.stream.Collectors;
+
+
+
+<span class="nc" id="L12">public class run {</span>
+
+    public static void main(String[] args) throws IOException {
+
+        String contentOfUrl;
+        String contentOfFile;
+        final String wordsFinal;
+
+
+//        String myURL = args[0];
+//        String myURL = &quot;https://www.rte.ie/news/&quot; ;
+<span class="nc" id="L23">        String myURL = &quot;https://www.bbc.com/news&quot; ;</span>
+
+
+        //Method call urlretrieve
+<span class="nc" id="L27">        contentOfUrl = urlRetrieve.callURL(myURL);     //Url call</span>
+
+
+        //method call filter
+<span class="nc" id="L31">        Filter filter = new Filter(contentOfUrl);</span>
+<span class="nc" id="L32">        filter.find();  //Runs the filter/cleaner class method</span>
+<span class="nc" id="L33">        wordsFinal = filter.getWordsFinal();    //Retrieves the final result</span>
+
+
+        //method call open file
+        //Opening exclusionLists
+<span class="nc" id="L38">        fileManagment fileManagment = new fileManagment();       //Create an instance of filereader</span>
+<span class="nc" id="L39">        String ExclusionList = fileManagment.fileIn(&quot;ExclusionList.txt&quot;);</span>
+
+<span class="nc" id="L41">        fileManagment fileManagment2 = new fileManagment();         //Create an instance of filereader</span>
+<span class="nc" id="L42">        String ExclusionList_Keywords = fileManagment2.fileIn(&quot;ExclusionList_Keywords.txt&quot;);</span>
+
+
+
+//Add method for this
+        //Arraylist to store url word content
+<span class="nc" id="L48">        ArrayList&lt;String&gt; urlList = new ArrayList&lt;String&gt;();</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        for(String word : wordsFinal.split(&quot; &quot;)) {</span>
+<span class="nc" id="L50">            urlList.add(word);</span>
+        }
+//        List&lt;String&gt; urlDistinct = urlList.stream().distinct().collect(Collectors.toList());
+//        System.out.println(&quot;\n&quot; + urlDistinct);
+
+
+//Add method for this
+        //Arraylist to store string content from retrieved data file
+<span class="nc" id="L58">        ArrayList&lt;String&gt; exNouns = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L59">        String Nouns = ExclusionList.replaceAll(&quot;\\W&quot;, &quot; &quot;); //Retrieve only text</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        for(String w : Nouns.split(&quot; &quot;)) {</span>
+<span class="nc" id="L61">            exNouns.add(w);</span>
+        }
+
+        //Arraylist to store string content from retrieved data file
+<span class="nc" id="L65">        ArrayList&lt;String&gt; exKeywords = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L66">        String Keyword = ExclusionList_Keywords.replaceAll(&quot;\\W&quot;, &quot; &quot;);   //Retrieve only text</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        for(String w : Keyword.split(&quot; &quot;)) {</span>
+<span class="nc" id="L68">            exKeywords.add(w);</span>
+        }
+
+
+
+
+        //remove all elements from second list
+<span class="nc" id="L75">        ArrayList&lt;String&gt; Keywords = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L76">        Keywords.addAll(urlList);</span>
+<span class="nc" id="L77">        Keywords.removeAll(exKeywords); //Remove any differences</span>
+//        Count the occurrence of ...
+<span class="nc" id="L79">        Map&lt;String, Long&gt; countsKeywords = Keywords.stream().collect(Collectors.groupingBy(e -&gt; e, Collectors.counting()));</span>
+<span class="nc" id="L80">        System.out.println(countsKeywords);</span>
+
+
+
+
+
+//        Set&lt;String&gt; uniqueKeywords = new HashSet&lt;String&gt;(Keywords); //Why am i not using this?
+//        System.out.println(&quot;\nUnique keys: &quot; + Keywords.size() + &quot; \n&quot;  + uniqueKeywords);
+//        System.out.println(&quot;Key words are&quot; + Keywords + &quot;Size &quot; + Keywords.size());
+
+
+//        remove all elements from second list
+//        METHOD HERE?
+<span class="nc" id="L93">        ArrayList&lt;String&gt; NounsA = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L94">        NounsA.addAll(urlList);</span>
+<span class="nc" id="L95">        NounsA.removeAll(exNouns);</span>
+<span class="nc" id="L96">        Map&lt;String, Long&gt; countsNouns = NounsA.stream().collect(Collectors.groupingBy(e -&gt; e, Collectors.counting()));  //?</span>
+
+<span class="nc" id="L98">        System.out.println(countsNouns);</span>
+
+        //Get unique list of nouns
+<span class="nc" id="L101">        Set&lt;String&gt; uniqueNouns = new HashSet&lt;String&gt;(NounsA); //GET JUST UNIQUE WORDS</span>
+//        System.out.println(&quot;\nUnique nouns count: &quot; + NounsA.size() + &quot; \n&quot;  + NounsA);
+
+
+//        Final keywords
+<span class="nc" id="L106">        Keywords.removeAll(NounsA);</span>
+//        System.out.println(&quot;\nUnique keywords final &quot; + Keywords.size() + &quot; \n&quot; + Keywords);
+
+
+//        Convert Nouns to a string, MAKE A METHOD!
+<span class="nc" id="L111">        String NounsString = String.join(&quot; &quot;, uniqueNouns);</span>
+//        System.out.println(&quot;\n Nouns are \n &quot; + NounsString);
+
+//        Convert keywords to a string, make a method
+//        String KeywordsString = String.join(&quot; &quot;, Keywords);
+//        System.out.println(&quot;\n Keywords are \n &quot; + KeywordsString);
+<span class="nc" id="L117">        Set&lt;String&gt; uniqueKeywords = new HashSet&lt;String&gt;(Keywords); //GET JUST UNIQUE WORDS</span>
+<span class="nc" id="L118">        String KeywordsString = String.join(&quot; &quot;, uniqueKeywords);</span>
+
+
+
+//        save to file
+<span class="nc" id="L123">        fileManagment fileWriter1 = new fileManagment();</span>
+<span class="nc" id="L124">        fileWriter1.writeFile(NounsString, &quot;nouns&quot; );</span>
+<span class="nc" id="L125">        fileWriter1.writeFile(KeywordsString, &quot;keywords&quot; );</span>
+
+
+//        fileRetrievalSortComapre fileRetrievalSortComapre = new fileRetrievalSortComapre();
+//        fileRetrievalSortComapre fileRetrievalSortComapre2 = new fileRetrievalSortComapre();
+
+//        fileRetrievalSortComapre.fileChecker(&quot;C:\\Users\\ccharlton\\IdeaProjects\\cc&quot;, &quot;k&quot;);
+//        System.out.println(&quot;\n&quot;);
+//        fileRetrievalSortComapre2.fileChecker(&quot;C:\\Users\\ccharlton\\IdeaProjects\\cc&quot;, &quot;n&quot;);
+
+
+<span class="nc" id="L136">        fileRetrieval fileRetrieval = new fileRetrieval();</span>
+<span class="nc" id="L137">        fileRetrieval fileRetrieval2 = new fileRetrieval();</span>
+<span class="nc" id="L138">        fileCompare fileCompare1 = new fileCompare();</span>
+<span class="nc" id="L139">        fileCompare fileCompare2 = new fileCompare();</span>
+
+
+
+        //Gets the current path and uses that to
+<span class="nc" id="L144">        Path currentRelativePath = Paths.get(&quot;&quot;);</span>
+<span class="nc" id="L145">        String absolutePath = currentRelativePath.toAbsolutePath().toString();</span>
+//        System.out.println(&quot;Current relative path is: &quot; + s);
+
+
+        // ????? What do i want here
+<span class="nc" id="L150">        fileManagment fileWriter2 = new fileManagment();</span>
+<span class="nc" id="L151">        fileWriter2.writeFile(fileCompare1.sortCompare(fileRetrieval.fileChecker(absolutePath, &quot;n&quot;)), &quot;ResultNouns&quot; );</span>
+<span class="nc" id="L152">        fileWriter2.writeFile(fileCompare2.sortCompare(fileRetrieval2.fileChecker(absolutePath, &quot;k&quot;)), &quot;ResultKeywords&quot; );</span>
+
+<span class="nc" id="L154">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
