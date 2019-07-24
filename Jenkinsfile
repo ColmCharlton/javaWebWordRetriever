@@ -22,7 +22,7 @@ pipeline {
         stage('Maven build and run') {
             steps {
              sh 'mvn clean verify -fn'
-//            sh 'mvn package'
+             sh 'mvn package'
 
             }
         }
