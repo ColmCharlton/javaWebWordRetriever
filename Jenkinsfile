@@ -59,7 +59,7 @@ pipeline {
                 publishHTML([allowMissing: false,
                              alwaysLinkToLastBuild: false,
                              keepAll: true,
-                             reportDir: 'C:\\Users\\ccharlton\\.jenkins\\workspace\\javaNounExtractor\\SavedFiles',
+                             reportDir: 'C:\\Users\\ccharlton\\.jenkins\\workspace\\javaNounExtractor\\SavedFiles\\nouns',
                              reportFiles: 'nouns.html',
                              reportName: 'Noun Report',
                              reportTitles: ''])
