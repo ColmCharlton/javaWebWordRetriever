@@ -21,7 +21,7 @@ pipeline {
 
         stage('Maven build and run') {
             steps {
-             sh 'mvn clean package -u'
+             sh 'mvn clean verify -fn'
 //            sh 'mvn package'
 
             }
@@ -29,6 +29,7 @@ pipeline {
 
         stage('Maven build and test') {
             steps {
+               // sh 'mvn package'
                 sh 'mvn test'
             }
         }
