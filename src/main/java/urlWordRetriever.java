@@ -18,8 +18,8 @@ public class urlWordRetriever {
         final String wordsFinal;
 
 
-//        String myURL = args[0];
-        String myURL = "https://www.rte.ie/news/" ;
+        String myURL = args[0];
+//        String myURL = "https://www.rte.ie/news/" ;
 //        String myURL = "https://www.bbc.com/news" ;
 
 
@@ -35,13 +35,13 @@ public class urlWordRetriever {
         //method call open file
         //Opening exclusionLists
         fileManagment fileManagment = new fileManagment();       //Create an instance of filereader
-        String ExclusionList = fileManagment.fileIn("ExclusionList.txt");
-//        String ExclusionList = fileManagment.fileIn("classes\\ExclusionList.txt");  //need to uncomment this to jar file to urlWordRetriever
+//        String ExclusionList = fileManagment.fileIn("ExclusionList.txt");
+        String ExclusionList = fileManagment.fileIn("classes\\ExclusionList.txt");  //need to uncomment this to jar file to urlWordRetriever
 
 
         fileManagment fileManagment2 = new fileManagment();         //Create an instance of filereader
-        String ExclusionList_Keywords = fileManagment2.fileIn("ExclusionList_Keywords.txt");
-//        String ExclusionList_Keywords = fileManagment2.fileIn("classes\\ExclusionList_Keywords.txt");
+//        String ExclusionList_Keywords = fileManagment2.fileIn("ExclusionList_Keywords.txt");
+        String ExclusionList_Keywords = fileManagment2.fileIn("classes\\ExclusionList_Keywords.txt");
 
 
 
