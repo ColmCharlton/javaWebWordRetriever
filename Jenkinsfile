@@ -13,8 +13,8 @@ pipeline {
     stages {
         stage('Repo retrieval') {
             steps {
-                checkout scm
                   step([$class: 'WsCleanup'])
+                    checkout scm
 //                    git 'https://github.com/ColmCharlton/javaWebWordRetriever'
 //                    git branch: 'modify', url: 'https://github.com/ColmCharlton/javaWebWordRetriever'
             }
