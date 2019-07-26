@@ -6,10 +6,12 @@ pipeline {
         //re-triggers pipeline new source changes
         pollSCM('H */4 * * 1-5')
     }
-
     tools {
         maven 'mvn3.6.1'
     }
+
+    cleanWs()   //Clean the workspace
+
     stages {
         stage('Repo retrieval') {
             steps {
