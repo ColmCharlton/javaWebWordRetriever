@@ -27,11 +27,15 @@ pipeline {
 
         stage('Maven build and test') {
             steps {
-                sh 'mvn clean package -fn'
-//                sh 'mvn package'
-
-                sh 'mvn test'
-
+                step{
+                    sh 'mvn clean compile -fn'
+                }
+                step{
+                    sh 'mvn test'
+                }
+                step{
+                sh 'mvn package'
+                }
             }
         }
 
