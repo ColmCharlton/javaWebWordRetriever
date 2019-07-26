@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 public class fileCompare {
 
+    private ArrayList<String> retrievedFiles;
 
     //This should be two classes sort and compare
 
@@ -22,8 +23,6 @@ public class fileCompare {
             for (int i = 0; i < retrievedFiles.size(); i++) {
 //                System.out.println(a.get(i));
             }
-
-
 
 
 

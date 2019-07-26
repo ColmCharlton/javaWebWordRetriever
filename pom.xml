@@ -31,7 +31,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>run</mainClass>
+                            <mainClass>urlWordRetriever</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

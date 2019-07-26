@@ -19,7 +19,7 @@ pipeline {
             }
         }
 
-        stage('Maven build and run') {
+        stage('Maven build and urlWordRetriever') {
             steps {
              sh 'mvn clean verify -fn'
              sh 'mvn package'

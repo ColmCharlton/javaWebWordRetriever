@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 
 
-public class run {
+public class urlWordRetriever {
 
     public static void main(String[] args) throws IOException {
 
@@ -32,12 +32,11 @@ public class run {
         filter.find();  //Runs the filter/cleaner class method
         wordsFinal = filter.getWordsFinal();    //Retrieves the final result
 
-
         //method call open file
         //Opening exclusionLists
         fileManagment fileManagment = new fileManagment();       //Create an instance of filereader
         String ExclusionList = fileManagment.fileIn("ExclusionList.txt");
-//        String ExclusionList = fileManagment.fileIn("classes\\ExclusionList.txt");
+//        String ExclusionList = fileManagment.fileIn("classes\\ExclusionList.txt");  //need to uncomment this to jar file to urlWordRetriever
 
 
         fileManagment fileManagment2 = new fileManagment();         //Create an instance of filereader
