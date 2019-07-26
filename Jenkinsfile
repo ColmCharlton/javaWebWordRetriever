@@ -10,11 +10,10 @@ pipeline {
         maven 'mvn3.6.1'
     }
 
-    cleanWs()   //Clean the workspace
-
     stages {
         stage('Repo retrieval') {
             steps {
+                step([$class: 'WsCleanup'])
                 checkout scm
 //                    git 'https://github.com/ColmCharlton/javaWebWordRetriever'
 //                    git branch: 'modify', url: 'https://github.com/ColmCharlton/javaWebWordRetriever'
