@@ -45,7 +45,7 @@ public class urlWordRetriever {
 
 
 
-//Add method for this
+        //Add method for this
         //Arraylist to store url word content
         ArrayList<String> urlList = new ArrayList<String>();
         for(String word : wordsFinal.split(" ")) {
@@ -55,7 +55,7 @@ public class urlWordRetriever {
 //        System.out.println("\n" + urlDistinct);
 
 
-//Add method for this
+        //Add method for this
         //Arraylist to store string content from retrieved data file
         ArrayList<String> exNouns = new ArrayList<String>();
         String Nouns = ExclusionList.replaceAll("\\W", " "); //Retrieve only text
@@ -73,7 +73,7 @@ public class urlWordRetriever {
 
 
 
-        //remove all elements from second list
+        //Remove all elements from second list
         ArrayList<String> Keywords = new ArrayList<String>();
         Keywords.addAll(urlList);
         Keywords.removeAll(exKeywords); //Remove any differences
