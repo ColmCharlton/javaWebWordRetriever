@@ -95,9 +95,8 @@ public class urlWordRetriever {
         ArrayList<String> NounsA = new ArrayList<String>();
         NounsA.addAll(urlList);
         NounsA.removeAll(exNouns);
-        Map<String, Long> countsNouns = NounsA.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));  //?
-
-        System.out.println(countsNouns);
+//        Map<String, Long> countsNouns = NounsA.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));  //?
+//        System.out.println(countsNouns);
 
         //Get unique list of nouns
         Set<String> uniqueNouns = new HashSet<String>(NounsA); //GET JUST UNIQUE WORDS
@@ -113,6 +112,7 @@ public class urlWordRetriever {
         String NounsString = String.join(" ", uniqueNouns);
 //        System.out.println("\n Nouns are \n " + NounsString);
 
+
 //        Convert keywords to a string, make a method
 //        String KeywordsString = String.join(" ", Keywords);
 //        System.out.println("\n Keywords are \n " + KeywordsString);
@@ -127,13 +127,6 @@ public class urlWordRetriever {
         fileWriter1.writeFile(KeywordsString, "keywords" );
 
 
-//        fileRetrievalSortComapre fileRetrievalSortComapre = new fileRetrievalSortComapre();
-//        fileRetrievalSortComapre fileRetrievalSortComapre2 = new fileRetrievalSortComapre();
-
-//        fileRetrievalSortComapre.fileChecker("C:\\Users\\ccharlton\\IdeaProjects\\cc", "k");
-//        System.out.println("\n");
-//        fileRetrievalSortComapre2.fileChecker("C:\\Users\\ccharlton\\IdeaProjects\\cc", "n");
-
 
         fileRetrieval fileRetrieval = new fileRetrieval();
         fileRetrieval fileRetrieval2 = new fileRetrieval();
@@ -145,7 +138,6 @@ public class urlWordRetriever {
         //Gets the current path and uses that to
         Path currentRelativePath = Paths.get("");
         String absolutePath = currentRelativePath.toAbsolutePath().toString();
-//        System.out.println("Current relative path is: " + s);
 
 
         // ????? What do i want here

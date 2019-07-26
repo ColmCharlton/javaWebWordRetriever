@@ -20,7 +20,7 @@ public class TestFileManager {
         fileManagment fileManagment = new fileManagment();
 
         BufferedWriter output;
-        output = fileManagment.writeFile("hello", "testFile.txt");
+        output = fileManagment.writeFile("hello", "testFile");
         Assert.assertNotNull(output);
 
     }
