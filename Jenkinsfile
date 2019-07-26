@@ -19,23 +19,21 @@ pipeline {
             }
         }
 
-        stage('Maven build and urlWordRetriever') {
-            steps {
-             sh 'mvn clean verify -fn'
-             sh 'mvn package'
+        //NEED TO ADD STEP TO RETRIEVE JENKINS WORKING DIRECTORY
+        //def project_path = ""
+        //dir(project_path)
 
-            }
-        }
 
         stage('Maven build and test') {
             steps {
-               // sh 'mvn package'
+                sh 'mvn clean package -fn'
+//                sh 'mvn package'
+
                 sh 'mvn test'
+
             }
         }
 
-        //def project_path = ""
-        //dir(project_path)
 
 
         stage('Archival') {
@@ -58,18 +56,6 @@ pipeline {
             }
         }
 
-        stage('Publish html') {
-            steps {
-                publishHTML([allowMissing: false,
-                             alwaysLinkToLastBuild: false,
-                             keepAll: true,
-                             reportDir: 'C:\\Users\\ccharlton\\.jenkins\\workspace\\javaNounExtractor\\SavedFiles\\nouns',
-                             reportFiles: 'nouns.html',
-                             reportName: 'Noun Report',
-                             reportTitles: ''])
-            }
-        }
-
         stage('Notify User') {
             steps {
                 notify 'Ran successfully!'
@@ -89,3 +75,4 @@ def notify(status) {
     )
 
 }
+
