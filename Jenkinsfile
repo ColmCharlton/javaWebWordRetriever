@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'master' }
     triggers{
         //re-triggers pipeline on regular intervals
         cron('H H(9-16)/2 * * 1-5')
@@ -13,8 +13,8 @@ pipeline {
     stages {
         stage('Repo retrieval') {
             steps {
-                  step([$class: 'WsCleanup'])
-                    checkout scm
+                step([$class: 'WsCleanup'])
+                checkout scm
 //                    git 'https://github.com/ColmCharlton/javaWebWordRetriever'
 //                    git branch: 'modify', url: 'https://github.com/ColmCharlton/javaWebWordRetriever'
             }
@@ -52,8 +52,6 @@ pipeline {
 
                 archiveArtifacts 'target/*.?ar'
                 archiveArtifacts allowEmptyArchive: true, artifacts: '*.txt'
-                //archiveArtifacts allowEmptyArchive: true, artifacts: 'R*.txt'
-                //archiveArtifacts allowEmptyArchive: true, artifacts: 'n*.txt'
             }
         }
 
