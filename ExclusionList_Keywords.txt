@@ -81,7 +81,7 @@ under the table
 along a route
 
 to be
-to urlWordRetriever
+to NounExtractor
 to drive
 across the street
 along the way
@@ -17532,7 +17532,7 @@ frenzied
 frequent
 frequentative
 fresh
-fresh-urlWordRetriever
+fresh-NounExtractor
 freshman
 freshwater
 fretful
@@ -19130,7 +19130,7 @@ historiographic
 historiographical
 histrionic
 hit
-hit-and-urlWordRetriever
+hit-and-NounExtractor
 hitchy
 hither
 hithermost
@@ -27614,10 +27614,10 @@ ruminative
 rummy
 rumpled
 rumpless
-urlWordRetriever-down
-urlWordRetriever-in
-urlWordRetriever-of-the-mill
-urlWordRetriever-on
+NounExtractor-down
+NounExtractor-in
+NounExtractor-of-the-mill
+NounExtractor-on
 runaway
 runcinate
 runed
@@ -31440,7 +31440,7 @@ tinselly
 tinted
 tintless
 tiny
-tip-and-urlWordRetriever
+tip-and-NounExtractor
 tip-tilted
 tip-up
 tippable

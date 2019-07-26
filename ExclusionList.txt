@@ -81,7 +81,7 @@ under the table
 along a route
 
 to be
-to urlWordRetriever
+to NounExtractor
 to drive
 across the street
 along the way
@@ -7813,7 +7813,7 @@ zoologically
 711	rot	rotted	rotted	rots	rotting
 712	rub	rubbed	rubbed	rubs	rubbing
 713	rule	ruled	ruled	rules	ruling
-714	urlWordRetriever	ran	urlWordRetriever	runs	running
+714	NounExtractor	ran	NounExtractor	runs	running
 715	rush	rushed	rushed	rushes	rushing
 716	sabotage	sabotaged	sabotaged	sabotages	sabotaging
 717	sack	sacked	sacked	sacks	sacking
@@ -31911,16 +31911,16 @@ rumples
 rumpling
 rumpus
 rumpuses
-urlWordRetriever
-urlWordRetriever-down
-urlWordRetriever-in
-urlWordRetriever-off
-urlWordRetriever-offs
-urlWordRetriever-on
-urlWordRetriever-through
-urlWordRetriever-throughs
-urlWordRetriever-up
-urlWordRetriever-ups
+NounExtractor
+NounExtractor-down
+NounExtractor-in
+NounExtractor-off
+NounExtractor-offs
+NounExtractor-on
+NounExtractor-through
+NounExtractor-throughs
+NounExtractor-up
+NounExtractor-ups
 runabout
 runabouts
 runes
@@ -49338,7 +49338,7 @@ frenzied
 frequent
 frequentative
 fresh
-fresh-urlWordRetriever
+fresh-NounExtractor
 freshman
 freshwater
 fretful
@@ -50936,7 +50936,7 @@ historiographic
 historiographical
 histrionic
 hit
-hit-and-urlWordRetriever
+hit-and-NounExtractor
 hitchy
 hither
 hithermost
@@ -59420,10 +59420,10 @@ ruminative
 rummy
 rumpled
 rumpless
-urlWordRetriever-down
-urlWordRetriever-in
-urlWordRetriever-of-the-mill
-urlWordRetriever-on
+NounExtractor-down
+NounExtractor-in
+NounExtractor-of-the-mill
+NounExtractor-on
 runaway
 runcinate
 runed
@@ -63246,7 +63246,7 @@ tinselly
 tinted
 tintless
 tiny
-tip-and-urlWordRetriever
+tip-and-NounExtractor
 tip-tilted
 tip-up
 tippable
