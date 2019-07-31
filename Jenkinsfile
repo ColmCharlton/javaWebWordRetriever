@@ -11,6 +11,14 @@ pipeline {
     }
 
     stages {
+
+        agent {
+            docker { image 'maven:3-alpine' }
+        }
+        steps {
+            sh 'mvn --version'
+        }
+
         stage('Repo retrieval') {
             steps {
                 step([$class: 'WsCleanup'])
