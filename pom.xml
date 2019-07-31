@@ -15,15 +15,17 @@
         <!-- The Sonar Jacoco Listener for JUnit to extract coverage details per test -->
         <sonar-jacoco-listeners.version>1.4</sonar-jacoco-listeners.version>
 <!--        <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>-->
+
         <jacoco.outputDir>${project.build.directory}</jacoco.outputDir>
         <!-- Jacoco output file for UTs -->
-        <jacoco.out.ut.file>jacoco-ut.exec</jacoco.out.ut.file>
+        <jacoco.out.ut.file>jacoco.exec</jacoco.out.ut.file>
         <!-- Tells Sonar where the Jacoco coverage result file is located for Unit Tests -->
-        <sonar.jacoco.reportPath>${jacoco.outputDir}/${jacoco.out.ut.file}</sonar.jacoco.reportPath>
+        <sonar.jacoco.reportPath>${jacoco.outputDir}\${jacoco.out.ut.file}</sonar.jacoco.reportPath>
         <!-- Jacoco output file for ITs -->
-        <jacoco.out.it.file>jacoco-it.exec</jacoco.out.it.file>
+        <jacoco.out.it.file>jacoco.exec</jacoco.out.it.file>
         <!-- Tells Sonar where the Jacoco coverage result file is located for Integration Tests -->
-        <sonar.jacoco.itReportPath>${jacoco.outputDir}/${jacoco.out.it.file}</sonar.jacoco.itReportPath>
+        <sonar.jacoco.itReportPath>${jacoco.outputDir}\${jacoco.out.it.file}</sonar.jacoco.itReportPath>
+
         <sonar.language>java</sonar.language>
     </properties>
     <build>
