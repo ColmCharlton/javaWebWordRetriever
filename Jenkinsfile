@@ -9,16 +9,6 @@ pipeline {
     tools {
         maven 'mvn3.6.1'
     }
-    agent { dockerfile true }
-    stages {
-        stage('Test') {
-            steps {
-                sh 'node --version'
-                sh 'svn --version'
-            }
-        }
-    }
-
 
     stages {
         stage('Repo retrieval') {
