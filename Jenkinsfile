@@ -8,19 +8,10 @@ pipeline {
     }
     tools {
         maven 'mvn3.6.1'
+
     }
 
     stages {
-
-        stage('Docker') {
-            agent {
-            docker { image 'maven:3-alpine' }
-        }
-        steps {
-            sh 'mvn --version'
-        }
-        }
-
         stage('Repo retrieval') {
             steps {
                 step([$class: 'WsCleanup'])
