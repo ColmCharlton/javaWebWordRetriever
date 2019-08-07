@@ -23,5 +23,17 @@ public class TestFileManager {
         output = fileManagment.writeFile("hello", "testFile");
         Assert.assertNotNull(output);
 
+
+//        File file = new File("C:\\Users\\Mayank\\Desktop\\1.txt");
+//
+//        if(file.delete())
+//        {
+//            System.out.println("File deleted successfully");
+//        }
+//        else
+//        {
+//            System.out.println("Failed to delete the file");
+//        }
+
     }
 }
