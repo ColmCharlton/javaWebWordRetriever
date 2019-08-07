@@ -14,6 +14,7 @@ pipeline {
     stages {
         stage('Deploy docker containers for Sonarqube and database') {
             steps {
+                bat label: '', script: '''prepare_host.bat'''
                 bat label: '', script: 'docker-compose -f .\\docker-compose.yml up '
             }
         }
