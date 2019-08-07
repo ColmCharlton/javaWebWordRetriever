@@ -12,7 +12,14 @@ pipeline {
     }
 
     stages {
-        stage('Repo retrieval') {
+        stage('Deploy docker containers for Sonarqube and database') {
+            steps {
+                bat label: '', script: 'docker-compose -f .\\docker-compose.yml up '
+            }
+        }
+
+
+                stage('Repo retrieval') {
             steps {
                 step([$class: 'WsCleanup'])
                 checkout scm
