@@ -7,6 +7,11 @@ pipeline {
         pollSCM('H */4 * * 1-5')
     }
 
+    docker {
+                    image 'maven:3-alpine'
+                    args '-v /root/.m2:/root/.m2'
+                }
+
     stages {
         stage('Repo retrieval') {
             steps {
@@ -17,10 +22,6 @@ pipeline {
             }
         }
 
-        docker {
-                    image 'maven:3-alpine'
-                    args '-v /root/.m2:/root/.m2'
-                }
 
 
 
