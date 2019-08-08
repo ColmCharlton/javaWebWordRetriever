@@ -38,11 +38,16 @@ pipeline {
                 sh 'mvn clean compile -fn'
                 sh 'mvn test'
                 sh 'mvn package'
-                sh 'mvn sonar:sonar'
 
             }
         }
 
+            stage("build & SonarQube analysis") {
+            agent any
+            steps {
+              withSonarQubeEnv('My SonarQube Server') {
+                sh 'mvn clean package sonar:sonar'
+              }
 
 
 
