@@ -1,17 +1,6 @@
 pipeline {
+agent none
 
-
-    agent { label 'Win' }
-    stages{
-    stage('Deploy docker containers for Sonarqube and database') {
-        steps {
-            bat label: '', script: 'docker-compose -f .\\docker-compose.yml up '
-        }
-        }
-    }
-
-
-        agent { label 'master' }
     triggers{
         //re-triggers pipeline on regular intervals
         cron('H H(9-16)/2 * * 1-5')
@@ -23,8 +12,22 @@ pipeline {
 
     }
 
+
+    stages{
+    stage('Deploy docker containers for Sonarqube and database') {
+
+        agent { label 'Win' }
+        steps {
+            bat label: '', script: 'docker-compose -f .\\docker-compose.yml up '
+        }
+        }
+    }
+
+
     stages {
         stage('Repo retrieval') {
+        agent { label 'master' }
+
             steps {
                 step([$class: 'WsCleanup'])
                 checkout scm
