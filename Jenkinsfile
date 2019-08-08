@@ -1,6 +1,5 @@
 pipeline {
-    agent none
-
+    agent { label 'master' }
     triggers{
         //re-triggers pipeline on regular intervals
         cron('H H(9-16)/2 * * 1-5')
@@ -12,77 +11,67 @@ pipeline {
 
     }
 
-
-    stages{
+    stages {
         stage('Deploy docker containers for Sonarqube and database') {
-
-            agent {
-                label 'Win'
-                steps {
-                bat label: '', script: 'docker-compose -f .\\docker-compose.yml up '
-            }
-                }
-        }
-    }
-
-
-    stage('Repo retrieval') {
-        agent {
-            label 'master'
-
             steps {
-            step([$class: 'WsCleanup'])
-            checkout scm
+                bat label: '', script: 'docker-compose -f .\\docker-compose.yml up -d '
+            }
+        }
+
+
+                stage('Repo retrieval') {
+            steps {
+                step([$class: 'WsCleanup'])
+                checkout scm
 //                    git 'https://github.com/ColmCharlton/javaWebWordRetriever'
 //                    git branch: 'modify', url: 'https://github.com/ColmCharlton/javaWebWordRetriever'
+            }
+        }
+
+        //NEED TO ADD STEP TO RETRIEVE JENKINS WORKING DIRECTORY
+        //def project_path = ""
+        //dir(project_path)
+
+
+        stage('Maven build and test') {
+            steps{
+                sh 'mvn clean compile -fn'
+                sh 'mvn test'
+                sh 'mvn package'
+                sh 'mvn sonar:sonar'
+
+            }
+        }
+
+
+
+
+        stage('Archival') {
+            steps {
+                publishHTML([allowMissing         : true,
+                             alwaysLinkToLastBuild: false,
+                             keepAll              : true,
+                             reportDir            : 'target\\site\\jacoco',
+                             reportFiles          : 'index.html',
+                             reportName           : 'Code Coverage',
+                             reportTitles         : ''])
+
+                step([$class     : 'JUnitResultArchiver',
+                      testResults: 'target/surefire-reports/TEST-*.xml'])
+
+                archiveArtifacts 'target/*.?ar'
+                archiveArtifacts allowEmptyArchive: true, artifacts: '*.txt'
+            }
+        }
+
+        stage('Notify User') {
+            steps {
+                notify 'Ran successfully!'
+
+            }
         }
     }
-
-    //NEED TO ADD STEP TO RETRIEVE JENKINS WORKING DIRECTORY
-    //def project_path = ""
-    //dir(project_path)
-
-
-    stage('Maven build and test') {
-        step s{
-            sh 'mvn clean compile -fn'
-            sh 'mvn test'
-            sh 'mvn package'
-            sh 'mvn sonar:sonar'
-
-        }
-    }
-
-
-
-
-    stage('Archival') {
-        steps {
-            publishHTML([allowMissing         : true,
-                         alwaysLinkToLastBuild: false,
-                         keepAll              : true,
-                         reportDir            : 'target\\site\\jacoco',
-                         reportFiles          : 'index.html',
-                         reportName           : 'Code Coverage',
-                         reportTitles         : ''])
-
-            step([$class     : 'JUnitResultArchiver',
-                  testResults: 'target/surefire-reports/TEST-*.xml'])
-
-            archiveArtifacts 'target/*.?ar'
-            archiveArtifacts allowEmptyArchive: true, artifacts: '*.txt'
-        }
-    }
-
-    stage('Notify User') {
-        steps {
-            notify 'Ran successfully!'
-
-        }
-    }
-        }
 }
-
 
 
 def notify(status) {
