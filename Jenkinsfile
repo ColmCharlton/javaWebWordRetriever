@@ -19,7 +19,7 @@ pipeline {
         }
 
 
-                stage('Repo retrieval') {
+        stage('Repo retrieval') {
             steps {
                 step([$class: 'WsCleanup'])
                 checkout scm
@@ -42,50 +42,52 @@ pipeline {
             }
         }
 
-            stage("build & SonarQube analysis") {
+        stage("build & SonarQube analysis") {
             agent any
             steps {
-              withSonarQubeEnv('My SonarQube Server') {
-                sh 'mvn clean package sonar:sonar'
-              }
-
-
-
-        stage('Archival') {
-            steps {
-                publishHTML([allowMissing         : true,
-                             alwaysLinkToLastBuild: false,
-                             keepAll              : true,
-                             reportDir            : 'target\\site\\jacoco',
-                             reportFiles          : 'index.html',
-                             reportName           : 'Code Coverage',
-                             reportTitles         : ''])
-
-                step([$class     : 'JUnitResultArchiver',
-                      testResults: 'target/surefire-reports/TEST-*.xml'])
-
-                archiveArtifacts 'target/*.?ar'
-                archiveArtifacts allowEmptyArchive: true, artifacts: '*.txt'
+                withSonarQubeEnv('My SonarQube Server') {
+                    sh 'mvn clean package sonar:sonar'
+                }
             }
         }
 
-        stage('Notify User') {
-            steps {
-                notify 'Ran successfully!'
 
+
+                stage('Archival') {
+                    steps {
+                        publishHTML([allowMissing         : true,
+                                     alwaysLinkToLastBuild: false,
+                                     keepAll              : true,
+                                     reportDir            : 'target\\site\\jacoco',
+                                     reportFiles          : 'index.html',
+                                     reportName           : 'Code Coverage',
+                                     reportTitles         : ''])
+
+                        step([$class     : 'JUnitResultArchiver',
+                              testResults: 'target/surefire-reports/TEST-*.xml'])
+
+                        archiveArtifacts 'target/*.?ar'
+                        archiveArtifacts allowEmptyArchive: true, artifacts: '*.txt'
+                    }
+                }
+
+                stage('Notify User') {
+                    steps {
+                        notify 'Ran successfully!'
+
+                    }
+                }
             }
         }
-    }
-}
 
 
-def notify(status) {
-    emailext(
-            to: "cc@gmail.com",
-            subject: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-            body: """<p>${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+        def notify(status) {
+            emailext(
+                    to: "cc@gmail.com",
+                    subject: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                    body: """<p>${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
         <p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
-    )
+            )
 
-}
+        }
 
