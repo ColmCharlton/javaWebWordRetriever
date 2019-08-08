@@ -5,7 +5,7 @@ services:
     image: sonarqube
     restart: always
     ports:
-      - "9005:9000"
+      - "9000:9000"
     networks:
       - sonarnet
     environment:
@@ -28,11 +28,22 @@ services:
     volumes:
       - data:/var/lib/postgresql/data
 
+
+
+  mailhog:
+    image: mailhog/mailhog
+    restart: always
+    ports:
+      - "1025:1025"
+    ports:
+      - "8025:8025"
+
+
 volumes:
   data:
     external: true
-    
-    
+
+
 networks:
   sonarnet:
     driver: bridge
