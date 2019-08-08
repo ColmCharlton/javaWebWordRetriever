@@ -69,10 +69,10 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.2</version>
-                <configuration>
-                    <destFile>${sonar.jacoco.reportPath}</destFile>
-                    <append>true</append>
-                </configuration>
+<!--                <configuration>-->
+<!--&lt;!&ndash;                    <destFile>${sonar.jacoco.reportPath}</destFile>&ndash;&gt;-->
+<!--                    <append>true</append>-->
+<!--                </configuration>-->
                 <executions>
                     <execution>
                         <goals>
