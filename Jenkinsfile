@@ -14,13 +14,12 @@ pipeline {
     stages {
         stage('Deploy docker containers for Sonarqube and database') {
             steps {
-                bat label: '', script: 'docker-compose down'
                 bat label: '', script: 'docker-compose -f .\\docker-compose.yml up -d '
             }
         }
 
 
-        stage('Repo retrieval') {
+                stage('Repo retrieval') {
             steps {
                 step([$class: 'WsCleanup'])
                 checkout scm
@@ -34,23 +33,16 @@ pipeline {
         //dir(project_path)
 
 
-//        stage('Maven build and test') {
-//            steps{
-//                sh 'mvn clean compile -fn'
-//                sh 'mvn test'
-//                sh 'mvn package'
-//
-//            }
-//        }
+        stage('Maven build and test') {
+            steps{
+                sh 'mvn clean compile -fn'
+                sh 'mvn test'
+                sh 'mvn package'
+                sh 'mvn sonar:sonar'
 
-        stage("build & SonarQube analysis") {
-            agent any
-            steps {
-                withSonarQubeEnv('Sonar Scanner') {
-                    sh 'mvn clean package sonar:sonar'
-                }
             }
         }
+
 
 
 
