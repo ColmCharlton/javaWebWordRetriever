@@ -16,18 +16,21 @@ pipeline {
     stages{
         stage('Deploy docker containers for Sonarqube and database') {
 
-            agent { label 'Win' }
-            steps {
+            agent {
+                label 'Win'
+                steps {
                 bat label: '', script: 'docker-compose -f .\\docker-compose.yml up '
             }
+                }
         }
     }
 
 
     stage('Repo retrieval') {
-        agent { label 'master' }
+        agent {
+            label 'master'
 
-        steps {
+            steps {
             step([$class: 'WsCleanup'])
             checkout scm
 //                    git 'https://github.com/ColmCharlton/javaWebWordRetriever'
@@ -41,7 +44,7 @@ pipeline {
 
 
     stage('Maven build and test') {
-        steps{
+        step s{
             sh 'mvn clean compile -fn'
             sh 'mvn test'
             sh 'mvn package'
@@ -77,6 +80,7 @@ pipeline {
 
         }
     }
+        }
 }
 
 
