@@ -14,6 +14,7 @@ pipeline {
     stages {
         stage('Deploy docker containers for Sonarqube and database') {
             steps {
+                bat label: '', script: 'docker-compose down'
                 bat label: '', script: 'docker-compose -f .\\docker-compose.yml up -d '
             }
         }
@@ -33,14 +34,14 @@ pipeline {
         //dir(project_path)
 
 
-        stage('Maven build and test') {
-            steps{
-                sh 'mvn clean compile -fn'
-                sh 'mvn test'
-                sh 'mvn package'
-
-            }
-        }
+//        stage('Maven build and test') {
+//            steps{
+//                sh 'mvn clean compile -fn'
+//                sh 'mvn test'
+//                sh 'mvn package'
+//
+//            }
+//        }
 
         stage("build & SonarQube analysis") {
             agent any
@@ -53,41 +54,41 @@ pipeline {
 
 
 
-                stage('Archival') {
-                    steps {
-                        publishHTML([allowMissing         : true,
-                                     alwaysLinkToLastBuild: false,
-                                     keepAll              : true,
-                                     reportDir            : 'target\\site\\jacoco',
-                                     reportFiles          : 'index.html',
-                                     reportName           : 'Code Coverage',
-                                     reportTitles         : ''])
+        stage('Archival') {
+            steps {
+                publishHTML([allowMissing         : true,
+                             alwaysLinkToLastBuild: false,
+                             keepAll              : true,
+                             reportDir            : 'target\\site\\jacoco',
+                             reportFiles          : 'index.html',
+                             reportName           : 'Code Coverage',
+                             reportTitles         : ''])
 
-                        step([$class     : 'JUnitResultArchiver',
-                              testResults: 'target/surefire-reports/TEST-*.xml'])
+                step([$class     : 'JUnitResultArchiver',
+                      testResults: 'target/surefire-reports/TEST-*.xml'])
 
-                        archiveArtifacts 'target/*.?ar'
-                        archiveArtifacts allowEmptyArchive: true, artifacts: '*.txt'
-                    }
-                }
-
-                stage('Notify User') {
-                    steps {
-                        notify 'Ran successfully!'
-
-                    }
-                }
+                archiveArtifacts 'target/*.?ar'
+                archiveArtifacts allowEmptyArchive: true, artifacts: '*.txt'
             }
         }
 
+        stage('Notify User') {
+            steps {
+                notify 'Ran successfully!'
 
-        def notify(status) {
-            emailext(
-                    to: "cc@gmail.com",
-                    subject: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-                    body: """<p>${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-        <p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
-            )
-
+            }
         }
+    }
+}
+
+
+def notify(status) {
+    emailext(
+            to: "cc@gmail.com",
+            subject: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+            body: """<p>${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+        <p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
+    )
+
+}
 
