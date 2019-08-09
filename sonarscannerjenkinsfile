@@ -10,14 +10,22 @@ pipeline {
                 git branch: 'sonarcubeEdit', url: 'https://github.com/ColmCharlton/javaWebWordRetriever'
             }
         }
-        stage('build && SonarQube analysis') {
+        stage('Static code analysis, PMD ') {
+            steps {
+                withMaven(maven: 'mvn3.6.1') {
+                    sh 'mvn jxr:jxr pmd:pmd'
+
+                }
+            }
+        }
+            stage('Static code analysis, SonarQube ') {
             steps {
                 withSonarQubeEnv('sonarqube') {
                     // Optionally use a Maven environment you've configured already
                     withMaven(maven: 'mvn3.6.1') {
                         sh 'mvn -Dsonar.host.url=http://localhost:9005 sonar:sonar'
 //                        sh 'mvn clean package sonar:sonar'
-//                    }
+                    }
                     }
 
                 }
@@ -33,4 +41,3 @@ pipeline {
 //            }
 //        }
     }
-}
