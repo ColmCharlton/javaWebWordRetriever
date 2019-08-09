@@ -12,15 +12,15 @@
 <!--        <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>-->
 <!--        <sonar.jacoco.reportPath>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPath>-->
 
-<!--        <sonar.sources>src/main</sonar.sources>-->
-<!--        <sonar.tests>src/test</sonar.tests>-->
+        <sonar.sources>src/main</sonar.sources>
+        <sonar.tests>src/test</sonar.tests>
         <!-- Below property indicates the pattern of the test suite -->
 <!--        <runSuite>**/*Suite.class</runSuite>-->
         <!-- Sonar-JaCoCo properties -->
-<!--        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>-->
-<!--        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>-->
-<!--        <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>-->
-<!--        <sonar.language>java</sonar.language>-->
+        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+        <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+        <sonar.language>java</sonar.language>
     </properties>
     <build>
         <resources>
@@ -69,10 +69,10 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.2</version>
-<!--                <configuration>-->
-<!--&lt;!&ndash;                    <destFile>${sonar.jacoco.reportPath}</destFile>&ndash;&gt;-->
-<!--                    <append>true</append>-->
-<!--                </configuration>-->
+                <configuration>
+                    <destFile>${sonar.jacoco.reportPath}</destFile>
+                    <append>true</append>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
