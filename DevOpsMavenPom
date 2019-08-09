@@ -1,0 +1,42 @@
+Sonar analysis parameters
+
+
+    <!-- JaCoCo properties -->
+
+    <unit-tests.skip>false</unit-tests.skip>
+
+    <integration-tests.skip>false</integration-tests.skip>
+
+    <jacoco.dataFile>${project.build.directory}jacoco.exec</jacoco.dataFile>
+
+    <jacoco.reporting.outputDirectory>${project.build.directory}/reports/jacoco</jacoco.reporting.outputDirectory>
+
+    <jacoco.inclNoLocationClasses>true</jacoco.inclNoLocationClasses>
+
+
+
+    <!-- Sonar properties -->
+
+    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+
+    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+
+    <sonar.jacoco.reportPaths>${project.build.directory}/jacoco.exec</sonar.jacoco.reportPaths>
+
+    <sonar.exclusions>**/*Config.java, **/*Configuration.java, **/ECAApplication.java</sonar.exclusions>
+
+  </properties>
+
+
+
+
+
+mvn -Dspring.datasource.username=test -Dspring.datasource.password=test -Dspring.datasource.url=jdbc:mysql://0.0.0.0:32811/test verify -Pintegration-test-coverage
+
+[2019-07-31T10:29:23.814Z] [INFO] Scanning for projects...
+
+
+
+
+
+mvn -Dsonar.branch=master -Dsonar.jacoco.reportPath=target/coverage-reports/jacoco-ut.exec -Dsonar.jacoco.itReportPath=target/coverage-reports/jacoco-it.exec -Dsonar.host.url=http://ieatbldcom25.athtem.eei.ericsson.se:9005 sonar:sonar -Dsonar.scm.disabled=true
