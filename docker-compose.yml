@@ -5,7 +5,7 @@ services:
     image: sonarqube
     restart: always
     ports:
-      - "9000:9000"
+      - "9005:9000"
     networks:
       - sonarnet
     environment:
