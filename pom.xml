@@ -125,9 +125,9 @@
                             <version>3.4</version>
                             <configuration>
 
-                                <linkXref>true</linkXref>
-                                <sourceEncoding>utf-8</sourceEncoding>
-                                <minimumTokens>1</minimumTokens>
+<!--                                <linkXref>true</linkXref>-->
+<!--                                <sourceEncoding>utf-8</sourceEncoding>-->
+<!--                                <minimumTokens>1</minimumTokens>-->
 
 
                                 <skipEmptyReport>false</skipEmptyReport>
