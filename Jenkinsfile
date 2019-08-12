@@ -10,15 +10,25 @@ pipeline {
                 git branch: 'sonarcubeEdit', url: 'https://github.com/ColmCharlton/javaWebWordRetriever'
             }
         }
-        stage('Static code analysis, PMD ') {
+        stage('Build and package maven project') {
             steps {
                 withMaven(maven: 'mvn3.6.1') {
-                    sh 'mvn jxr:jxr pmd:pmd'
+                    sh 'mvn clean package'
 
                 }
             }
         }
-            stage('Static code analysis, SonarQube ') {
+
+        stage('Static code analysis, PMD ') {
+            steps {
+                withMaven(maven: 'mvn3.6.1') {
+                    sh 'mvn jxr:jxr pmd:pmd'
+                    sh 'mvn jxr:jxr pmd:cpd'
+
+                }
+            }
+        }
+        stage('Static code analysis, SonarQube ') {
             steps {
                 withSonarQubeEnv('sonarqube') {
                     // Optionally use a Maven environment you've configured already
@@ -26,11 +36,11 @@ pipeline {
                         sh 'mvn -Dsonar.host.url=http://localhost:9005 sonar:sonar'
 //                        sh 'mvn clean package sonar:sonar'
                     }
-                    }
-
                 }
+
             }
         }
+
 //        stage("Quality Gate") {
 //            steps {
 //                timeout(time: 1, unit: 'HOURS') {
@@ -40,4 +50,45 @@ pipeline {
 //                }
 //            }
 //        }
+        stage('Archival') {
+            steps {
+                publishHTML([allowMissing         : true,
+                             alwaysLinkToLastBuild: false,
+                             keepAll              : true,
+                             reportDir            : 'target\\site',
+                             reportFiles          : 'pmd.html',
+                             reportName           : 'Static PMD report',
+                             reportTitles         : ''])
+
+                publishHTML([allowMissing         : true,
+                             alwaysLinkToLastBuild: false,
+                             keepAll              : true,
+                             reportDir            : 'target\\site\\jacoco',
+                             reportFiles          : 'index.html',
+                             reportName           : 'Code Coverage',
+                             reportTitles         : ''])
+
+
+                step([$class     : 'JUnitResultArchiver',
+                      testResults: 'target/surefire-reports/TEST-*.xml'])
+
+                archiveArtifacts 'target/*.?ar'
+                archiveArtifacts allowEmptyArchive: true, artifacts: '*.txt'
+            }
+        }
+    }
+        post {
+            always {
+                junit testResults: '**/target/surefire-reports/TEST-*.xml'
+
+                recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
+//                                                              ,checkStyle(), spotBugs()]
+//                recordIssues enabledForFailure: true, tools: checkStyle()
+//                recordIssues enabledForFailure: true, tool: spotBugs()
+//                recordIssues enabledForFailure: true, tool: cpd(pattern: '**/target/cpd.xml')
+//                recordIssues enabledForFailure: true, tools: pmdParser(pattern: '**/target/pmd.xml')
+//                recordIssues enabledForFailure: true, tools: pmdParser(pattern: '**/target/pmd.html')
+
+            }
+        }
     }
