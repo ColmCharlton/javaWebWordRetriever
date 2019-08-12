@@ -126,7 +126,7 @@
                             <configuration>
 
                                 <sourceEncoding>utf-8</sourceEncoding>
-                                <minimumTokens>100</minimumTokens>
+                                <minimumTokens>10</minimumTokens>
 
 
                                 <skipEmptyReport>false</skipEmptyReport>
