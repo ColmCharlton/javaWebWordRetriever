@@ -22,8 +22,8 @@ pipeline {
         stage('Static code analysis, PMD ') {
             steps {
                 withMaven(maven: 'mvn3.6.1') {
-                    sh 'mvn jxr:jxr pmd:pmd'
                     sh 'mvn jxr:jxr pmd:cpd'
+                    sh 'mvn jxr:jxr pmd:pmd'
 
                 }
             }
@@ -55,6 +55,15 @@ pipeline {
                 publishHTML([allowMissing         : true,
                              alwaysLinkToLastBuild: false,
                              keepAll              : true,
+                             reportDir            : 'target\\site\\jacoco',
+                             reportFiles          : 'index.html',
+                             reportName           : 'Code Coverage',
+                             reportTitles         : ''])
+
+
+                publishHTML([allowMissing         : true,
+                             alwaysLinkToLastBuild: false,
+                             keepAll              : true,
                              reportDir            : 'target\\site',
                              reportFiles          : 'pmd.html',
                              reportName           : 'Static PMD report',
@@ -63,9 +72,9 @@ pipeline {
                 publishHTML([allowMissing         : true,
                              alwaysLinkToLastBuild: false,
                              keepAll              : true,
-                             reportDir            : 'target\\site\\jacoco',
-                             reportFiles          : 'index.html',
-                             reportName           : 'Code Coverage',
+                             reportDir            : 'target\\site',
+                             reportFiles          : 'cpd.html',
+                             reportName           : 'CPD report',
                              reportTitles         : ''])
 
 
