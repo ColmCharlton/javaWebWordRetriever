@@ -40,3 +40,16 @@ mvn -Dspring.datasource.username=test -Dspring.datasource.password=test -Dspring
 
 
 mvn -Dsonar.branch=master -Dsonar.jacoco.reportPath=target/coverage-reports/jacoco-ut.exec -Dsonar.jacoco.itReportPath=target/coverage-reports/jacoco-it.exec -Dsonar.host.url=http://ieatbldcom25.athtem.eei.ericsson.se:9005 sonar:sonar -Dsonar.scm.disabled=true
+
+
+
+mvn clean install sonar:sonar 
+-Plocalhost 
+-Dsonar.host.url=http://localhost:9000 
+-Dsonar.jdbc.url=jdbc:mysql://localhost:3306/sonar 
+-Dsonar.jdbc.username=root -Dsonar.jdbc.password=abcdefgh 
+-Dsonar.dynamicAnalysis=reuseReports -Dsonar.skipDesign=true 
+-Dsonar.java.coveragePlugin=jacoco 
+-Dsonar.jacoco.reportPath=target/jacoco.exec 
+-Dsonar.jacoco.itReportPath=target/jacoco-it.exec 
+-Dsonar.surefire.reportsPath=target/surefire-reports

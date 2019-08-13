@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('SCM') {
             steps {
-                git branch: 'sonarcubeEdit', url: 'https://github.com/ColmCharlton/javaWebWordRetriever'
+                git branch: 'pmd', url: 'https://github.com/ColmCharlton/javaWebWordRetriever'
             }
         }
         stage('Build and package maven project') {
@@ -22,8 +22,8 @@ pipeline {
         stage('Static code analysis, PMD ') {
             steps {
                 withMaven(maven: 'mvn3.6.1') {
-                    sh 'mvn jxr:jxr pmd:pmd'
                     sh 'mvn jxr:jxr pmd:cpd'
+                    sh 'mvn jxr:jxr pmd:pmd'
 
                 }
             }
@@ -55,6 +55,15 @@ pipeline {
                 publishHTML([allowMissing         : true,
                              alwaysLinkToLastBuild: false,
                              keepAll              : true,
+                             reportDir            : 'target\\site\\jacoco',
+                             reportFiles          : 'index.html',
+                             reportName           : 'Code Coverage',
+                             reportTitles         : ''])
+
+
+                publishHTML([allowMissing         : true,
+                             alwaysLinkToLastBuild: false,
+                             keepAll              : true,
                              reportDir            : 'target\\site',
                              reportFiles          : 'pmd.html',
                              reportName           : 'Static PMD report',
@@ -63,9 +72,9 @@ pipeline {
                 publishHTML([allowMissing         : true,
                              alwaysLinkToLastBuild: false,
                              keepAll              : true,
-                             reportDir            : 'target\\site\\jacoco',
-                             reportFiles          : 'index.html',
-                             reportName           : 'Code Coverage',
+                             reportDir            : 'target\\site',
+                             reportFiles          : 'cpd.html',
+                             reportName           : 'CPD report',
                              reportTitles         : ''])
 
 
@@ -77,18 +86,16 @@ pipeline {
             }
         }
     }
-        post {
-            always {
-                junit testResults: '**/target/surefire-reports/TEST-*.xml'
+    post {
+        always {
+            junit testResults: '**/target/surefire-reports/TEST-*.xml'
 
-                recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()]
-//                                                              ,checkStyle(), spotBugs()]
-//                recordIssues enabledForFailure: true, tools: checkStyle()
-//                recordIssues enabledForFailure: true, tool: spotBugs()
-//                recordIssues enabledForFailure: true, tool: cpd(pattern: '**/target/cpd.xml')
-//                recordIssues enabledForFailure: true, tools: pmdParser(pattern: '**/target/pmd.xml')
-//                recordIssues enabledForFailure: true, tools: pmdParser(pattern: '**/target/pmd.html')
+            recordIssues enabledForFailure: true, tools: [mavenConsole(),
+                                                          java(),
+                                                          cpd(pattern: 'target\\cpd.xml'),
+                                                          pmdParser(pattern: 'target\\pmd.xml')]
+//                                                         javaDoc(),checkStyle(), spotBugs()]
 
-            }
         }
     }
+}

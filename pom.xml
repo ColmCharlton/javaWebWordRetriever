@@ -9,31 +9,44 @@
     <version>4.0-SNAPSHOT</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 
         <!-- JaCoCo properties -->
 
-        <unit-tests.skip>false</unit-tests.skip>
-        <integration-tests.skip>false</integration-tests.skip>
-        <jacoco.dataFile>${project.build.directory}jacoco.exec</jacoco.dataFile>
-        <jacoco.reporting.outputDirectory>${project.build.directory}/reports/jacoco</jacoco.reporting.outputDirectory>
-        <jacoco.inclNoLocationClasses>true</jacoco.inclNoLocationClasses>
+        <jacoco.dataFile>${project.build.directory}/jacoco.exec</jacoco.dataFile>
+        <jacoco.reporting.outputDirectory>${project.build.directory}/jacoco-report</jacoco.reporting.outputDirectory>
+
+<!--        <unit-tests.skip>false</unit-tests.skip>-->
+<!--        <integration-tests.skip>true</integration-tests.skip>-->
+<!--        <jacoco.dataFile>${project.build.directory}jacoco.exec</jacoco.dataFile>-->
+<!--        <jacoco.reporting.outputDirectory>${project.build.directory}/reports/jacoco</jacoco.reporting.outputDirectory>-->
+
+        <!--        <jacoco.inclNoLocationClasses>true</jacoco.inclNoLocationClasses>-->
 
 
         <!-- Sonar properties -->
-        <!--
-        <sonar.sources>src/main</sonar.sources>
-        <sonar.tests>src/test</sonar.tests>
-        <!- Below property indicates the pattern of the test suite -->
+<!--        &lt;!&ndash;-->
+<!--        <sonar.sources>src/main</sonar.sources>-->
+<!--        <sonar.tests>src/test</sonar.tests>-->
+<!--        <!- Below property indicates the pattern of the test suite &ndash;&gt;-->
 <!--        <runSuite>**/*Suite.class</runSuite>-->
 
 
         <!-- Sonar-JaCoCo properties -->
-        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-        <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+<!--        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>-->
+<!--        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>-->
+<!--        <sonar.jacoco.reportPaths>${project.build.directory}/jacoco.exec</sonar.jacoco.reportPaths>-->
+<!--        <sonar.jacoco.reportPath>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPath>-->
 <!--&lt;!&ndash;        <sonar.exclusions>**/*Config.java, **/*Configuration.java, **/ECAApplication.java</sonar.exclusions>&ndash;&gt;-->
+<!--        <sonar.language>java</sonar.language>-->
+
         <sonar.language>java</sonar.language>
+<!--        <sonar.host.url>http://172.17.211.137</sonar.host.url>-->
+        <sonar.sources>src/main</sonar.sources>
+        <sonar.tests>src/test</sonar.tests>
+        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+        <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
 
     </properties>
             <reporting>
@@ -98,25 +111,29 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.2</version>
-<!--                <configuration>-->
+                <configuration>
 <!--                    <destFile>${sonar.jacoco.reportPath}</destFile>-->
-<!--                    <append>true</append>-->
-<!--                </configuration>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <goals>-->
-<!--                            <goal>prepare-agent</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
+<!--                    <destFile>${project.build.directory}/reports/jacoco</destFile>-->
+                    <outputDirectory>target/jacoco-report</outputDirectory>
+                    <append>true</append>
+                </configuration>
+                <executions>
+                    <execution>
+
+                        <goals>
+                            <goal>prepare-agent</goal>
+
+                        </goals>
+                    </execution>
 <!--                    &lt;!&ndash; attached to Maven test phase &ndash;&gt;-->
-<!--                    <execution>-->
-<!--                        <id>report</id>-->
-<!--                        <phase>test</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>report</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <!-- PMD report -->
                         <plugin>
@@ -131,7 +148,7 @@
 
                                 <skipEmptyReport>false</skipEmptyReport>
 
-                                <failOnViolation>true</failOnViolation> <!-- this is actually true by default, but can be disabled -->
+                                <failOnViolation>false</failOnViolation> <!-- this is actually true by default, but can be disabled -->
                                 <printFailingErrors>true</printFailingErrors>
                             </configuration>
                             <executions>

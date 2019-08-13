@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('SCM') {
             steps {
-                git branch: 'sonarcubeEdit', url: 'https://github.com/ColmCharlton/javaWebWordRetriever'
+                git branch: 'pmd', url: 'https://github.com/ColmCharlton/javaWebWordRetriever'
             }
         }
         stage('Build and package maven project') {
