@@ -1,22 +1,10 @@
 pipeline {
     agent any
-    triggers{
-        //re-triggers pipeline on regular intervals
-        cron('H H(9-16)/2 * * 1-5')
-        //re-triggers pipeline new source changes
-        pollSCM('H */4 * * 1-5')
-    }
     tools {
         maven 'mvn3.6.1'
 
     }
     stages {
-        stage('Deploy docker containers for Sonarqube and database') {
-            steps {
-                bat label: '', script: 'docker-compose down'
-                bat label: '', script: 'docker-compose -f .\\docker-compose.yml up -d '
-            }
-        }
         stage('SCM') {
             steps {
                 git branch: 'pmd', url: 'https://github.com/ColmCharlton/javaWebWordRetriever'
@@ -31,27 +19,28 @@ pipeline {
             }
         }
 
-        stage('Static code analysis, PMD ') {
-            steps {
-                withMaven(maven: 'mvn3.6.1') {
-                    sh 'mvn jxr:jxr pmd:cpd'
-                    sh 'mvn jxr:jxr pmd:pmd'
-
-                }
-            }
-        }
+//        stage('Static code analysis, PMD ') {
+//            steps {
+//                withMaven(maven: 'mvn3.6.1') {
+//                    sh 'mvn jxr:jxr pmd:cpd'
+//                    sh 'mvn jxr:jxr pmd:pmd'
+//
+//                }
+//            }
+//        }
         stage('Static code analysis, SonarQube ') {
             steps {
-//                withSonarQubeEnv('sonarqube') {
+                withSonarQubeEnv('sonarqube') {
                     // Optionally use a Maven environment you've configured already
                     withMaven(maven: 'mvn3.6.1') {
                         sh 'mvn -Dsonar.host.url=http://localhost:9005 sonar:sonar'
-//                        sh 'mvn sonar:sonar'
-//                    }
+//                        sh 'mvn clean package sonar:sonar'
+                    }
                 }
 
             }
         }
+
 //        stage("Quality Gate") {
 //            steps {
 //                timeout(time: 1, unit: 'HOURS') {
