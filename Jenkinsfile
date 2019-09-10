@@ -42,11 +42,11 @@ pipeline {
         }
         stage('Static code analysis, SonarQube ') {
             steps {
-                withSonarQubeEnv('sonarqube') {
+//                withSonarQubeEnv('sonarqube') {
                     // Optionally use a Maven environment you've configured already
-//                    withMaven(maven: 'mvn3.6.1') {
-//                        sh 'mvn -Dsonar.host.url=http://localhost:9005 sonar:sonar'
-                        sh 'mvn sonar:sonar'
+                    withMaven(maven: 'mvn3.6.1') {
+                        sh 'mvn -Dsonar.host.url=http://localhost:9005 sonar:sonar'
+//                        sh 'mvn sonar:sonar'
 //                    }
                 }
 
