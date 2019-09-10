@@ -19,7 +19,6 @@ pipeline {
 //                        sh 'mvn clean package sonar:sonar'
 //                    }
                     }
-
                 }
             }
         }
