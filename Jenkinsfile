@@ -1,5 +1,11 @@
 pipeline {
     agent any
+    triggers{
+        //re-triggers pipeline on regular intervals
+        cron('H H(9-16)/2 * * 1-5')
+        //re-triggers pipeline new source changes
+        pollSCM('H */4 * * 1-5')
+    }
     tools {
         maven 'mvn3.6.1'
 
@@ -41,7 +47,7 @@ pipeline {
                     withMaven(maven: 'mvn3.6.1') {
 //                        sh 'mvn -Dsonar.host.url=http://localhost:9005 sonar:sonar'
                         sh 'mvn clean package sonar:sonar'
-
+                    }
                 }
 
             }
