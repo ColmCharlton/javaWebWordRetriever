@@ -19,15 +19,15 @@ pipeline {
             }
         }
 
-        stage('Static code analysis, PMD ') {
-            steps {
-                withMaven(maven: 'mvn3.6.1') {
-                    sh 'mvn jxr:jxr pmd:cpd'
-                    sh 'mvn jxr:jxr pmd:pmd'
-
-                }
-            }
-        }
+//        stage('Static code analysis, PMD ') {
+//            steps {
+//                withMaven(maven: 'mvn3.6.1') {
+//                    sh 'mvn jxr:jxr pmd:cpd'
+//                    sh 'mvn jxr:jxr pmd:pmd'
+//
+//                }
+//            }
+//        }
         stage('Static code analysis, SonarQube ') {
             steps {
                 withSonarQubeEnv('sonarqube') {
