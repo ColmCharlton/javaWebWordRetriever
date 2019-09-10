@@ -5,6 +5,11 @@ pipeline {
 
     }
     stages {
+        stage('Deploy docker containers for Sonarqube and database') {
+            steps {
+                bat label: '', script: 'docker-compose down'
+                bat label: '', script: 'docker-compose -f .\\docker-compose.yml up -d '
+            }
         stage('SCM') {
             steps {
                 git branch: 'pmd', url: 'https://github.com/ColmCharlton/javaWebWordRetriever'
